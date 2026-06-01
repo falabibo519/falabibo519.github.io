@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FALABIBO｜Hakka Futurism</title>
+  <meta name="description" content="FALABIBO — 台灣客家未來主義室內樂團。以客家八音為根，融合 Vaporwave、City Pop、爵士，創造台灣獨有聲響。">
+  <meta property="og:title" content="FALABIBO｜Hakka Futurism">
+  <meta property="og:description" content="Hakka Pa-yin music reimagined through Vaporwave, City Pop & Jazz. From Taiwan.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#050509">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+/* ═══════════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════════ */
+:root {
+  --bg:   #050509;
+  --bg2:  #09091a;
+  --bg3:  #0f0f22;
+  --bg4:  #16162c;
+  --pu:   #b84fff;
+  --pk:   #ff2d9b;
+  --cy:   #00d4f5;
+  --gd:   #e8a020;
+  --wh:   #f0f0ff;
+  --mt:   #505080;
+  --mt2:  #8888b0;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --fd:   'Bebas Neue', 'Impact', sans-serif;
+  --fb:   'Space Grotesk', 'Helvetica Neue', sans-serif;
+  --fs:   'Noto Serif TC', 'Georgia', serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; cursor: none; }
+body {
+  background: var(--bg); color: var(--wh);
+  font-family: var(--fb); line-height: 1.7; overflow-x: hidden;
+}
+body.loading { overflow: hidden; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--pu); border-radius: 2px; }
+a { color: inherit; text-decoration: none; }
+
+/* ═══════════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════════ */
+#cur {
+  position: fixed; z-index: 9999; pointer-events: none;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--pk); mix-blend-mode: screen;
+  transform: translate(-50%,-50%);
+  transition: width .18s var(--ease), height .18s var(--ease), background .2s;
+}
+#cur-ring {
+  position: fixed; z-index: 9998; pointer-events: none;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(184,79,255,.45);
+  transform: translate(-50%,-50%);
+}
+body:has(a:hover) #cur,
+body:has(button:hover) #cur { width: 14px; height: 14px; background: var(--pu); }
+body:has(a:hover) #cur-ring,
+body:has(button:hover) #cur-ring { width: 52px; height: 52px; border-color: rgba(255,45,155,.55); }
+
+/* ═══════════════════════════════════════════════
+   LOADER
+═══════════════════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 9000; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 28px; transition: opacity .7s ease, visibility .7s ease;
+}
+#loader.out { opacity: 0; visibility: hidden; }
+
+.ld-word {
+  font-family: var(--fd); font-size: clamp(3.5rem, 12vw, 8rem);
+  letter-spacing: .14em;
+  background: linear-gradient(135deg, #fff 0%, var(--pu) 50%, var(--pk) 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: grad-shift 3s ease infinite, ld-reveal .9s var(--ease) .2s both;
+  clip-path: inset(0 100% 0 0);
+}
+@keyframes ld-reveal { to { clip-path: inset(0 0% 0 0); } }
+@keyframes grad-shift {
+  0%,100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.ld-sub {
+  font-family: var(--fb); font-size: .75rem; letter-spacing: .3em;
+  color: var(--mt2); text-transform: uppercase;
+  opacity: 0; animation: fade-in .6s ease .9s forwards;
+}
+.ld-bar {
+  width: 160px; height: 1px; background: var(--bg4); overflow: hidden; border-radius: 1px;
+  opacity: 0; animation: fade-in .4s ease .4s forwards;
+}
+.ld-bar::after {
+  content: ''; display: block; height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--pu), var(--pk));
+  animation: ld-prog 1.1s var(--ease) .5s forwards;
+}
+@keyframes ld-prog { to { width: 100%; } }
+@keyframes fade-in { to { opacity: 1; } }
+
+/* ═══════════════════════════════════════════════
+   SCROLL PROGRESS
+═══════════════════════════════════════════════ */
+#prog {
+  position: fixed; top: 0; left: 0; z-index: 200; height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--pu), var(--pk), var(--cy));
+  transition: width .1s linear;
+}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 22px 56px; display: flex; align-items: center; justify-content: space-between;
+  transition: padding .4s var(--ease), background .4s, backdrop-filter .4s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+nav.stuck {
+  padding: 14px 56px; background: rgba(5,5,9,.88);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-color: rgba(184,79,255,.12);
+}
+.nav-logo {
+  font-family: var(--fd); font-size: 1.25rem; letter-spacing: .18em;
+  background: linear-gradient(90deg, var(--wh) 30%, var(--pu));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: none;
+}
+.nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: .78rem; letter-spacing: .13em; text-transform: uppercase; color: var(--mt2);
+  cursor: none; position: relative; transition: color .25s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 1px; background: var(--pk);
+  transform: scaleX(0); transform-origin: right; transition: transform .3s var(--ease);
+}
+.nav-links a:hover { color: var(--wh); }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* ═══════════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════════ */
+#hero {
+  position: relative; min-height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 100px 24px 100px;
+}
+
+/* Hero photo bg */
+.h-photo-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center 30%;
+  opacity: 0;
+  transition: opacity 1s ease 0.5s;
+}
+.h-photo-bg.loaded { opacity: 1; }
+.h-photo-overlay {
+  position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(5,5,9,0.82) 0%,
+    rgba(5,5,9,0.55) 50%,
+    rgba(5,5,9,0.75) 100%
+  );
+}
+
+/* Aurora blobs */
+.aurora {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); opacity: .22; pointer-events: none;
+  animation: blob-move linear infinite;
+}
+.a1 {
+  width: 750px; height: 750px; top: -20%; left: -18%;
+  background: radial-gradient(circle, var(--pu) 0%, transparent 68%);
+  animation-duration: 20s;
+}
+.a2 {
+  width: 520px; height: 520px; top: 25%; right: -12%;
+  background: radial-gradient(circle, var(--pk) 0%, transparent 68%);
+  animation-duration: 15s; animation-delay: -6s;
+}
+.a3 {
+  width: 640px; height: 640px; bottom: -22%; left: 28%;
+  background: radial-gradient(circle, #0066cc 0%, transparent 68%);
+  animation-duration: 22s; animation-delay: -11s;
+}
+@keyframes blob-move {
+  0%   { transform: translate(0,0) rotate(0deg) scale(1); }
+  25%  { transform: translate(35px,-28px) rotate(90deg) scale(1.08); }
+  50%  { transform: translate(-18px,44px) rotate(180deg) scale(.94); }
+  75%  { transform: translate(-44px,-18px) rotate(270deg) scale(1.04); }
+  100% { transform: translate(0,0) rotate(360deg) scale(1); }
+}
+
+/* Perspective grid floor */
+.h-grid {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 52%;
+  background:
+    linear-gradient(rgba(184,79,255,.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184,79,255,.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+  transform: perspective(480px) rotateX(58deg);
+  transform-origin: bottom;
+  mask-image: linear-gradient(to top, rgba(0,0,0,.5), transparent);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,.5), transparent);
+  pointer-events: none;
+}
+
+/* Noise grain overlay */
+.noise {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 280px 280px;
+}
+
+/* Floating Chinese characters */
+.fc {
+  position: absolute; font-family: var(--fs); font-weight: 300;
+  color: rgba(240,240,255,.06); pointer-events: none; user-select: none;
+  animation: fc-float ease-in-out infinite;
+}
+.fc:nth-child(1) { font-size: 9rem; top: 12%; left: 4%;  animation-duration: 19s; }
+.fc:nth-child(2) { font-size: 6rem; top: 62%; left: 6%;  animation-duration: 16s; animation-delay: -5s; }
+.fc:nth-child(3) { font-size:10rem; top: 14%; right: 5%; animation-duration: 23s; animation-delay: -9s; }
+.fc:nth-child(4) { font-size: 7rem; top: 68%; right: 4%; animation-duration: 18s; animation-delay: -3s; }
+.fc:nth-child(5) { font-size: 5rem; top: 42%; left: 2%;  animation-duration: 21s; animation-delay:-13s; }
+@keyframes fc-float {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  30%      { transform: translateY(-18px) rotate(2deg); }
+  70%      { transform: translateY(14px) rotate(-2deg); }
+}
+
+/* Scanline accent (vaporwave detail) */
+.scanlines {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px, transparent 3px,
+    rgba(0,0,0,.04) 3px, rgba(0,0,0,.04) 4px
+  );
+  opacity: .6;
+}
+
+/* Hero content */
+.hc { position: relative; z-index: 2; }
+
+.h-eyebrow {
+  display: inline-flex; align-items: center; gap: 12px; margin-bottom: 28px;
+  font-size: .72rem; letter-spacing: .28em; text-transform: uppercase; color: var(--cy);
+  opacity: 0; animation: fade-in .6s ease 1.8s forwards;
+}
+.h-eyebrow::before, .h-eyebrow::after {
+  content: ''; flex-shrink: 0; width: 28px; height: 1px;
+}
+.h-eyebrow::before { background: linear-gradient(90deg, transparent, var(--cy)); }
+.h-eyebrow::after  { background: linear-gradient(90deg, var(--cy), transparent); }
+
+.h-title {
+  font-family: var(--fd);
+  font-size: clamp(5.5rem, 20vw, 15rem);
+  letter-spacing: .05em; line-height: .9;
+  background: linear-gradient(135deg, #fff 0%, #e0d8ff 25%, var(--pu) 55%, var(--pk) 80%, var(--cy) 100%);
+  background-size: 300% 300%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: grad-shift 7s ease infinite;
+  margin-bottom: 14px;
+  opacity: 0; animation: h-title-in .9s var(--ease) 1.6s both, grad-shift 7s ease 2.5s infinite;
+}
+@keyframes h-title-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.h-cn {
+  font-family: var(--fs); font-size: clamp(1rem, 2.8vw, 1.45rem);
+  font-weight: 300; letter-spacing: .65em; color: var(--mt2);
+  margin-bottom: 36px;
+  opacity: 0; animation: fade-in .7s ease 2.1s forwards;
+}
+
+.h-desc {
+  max-width: 560px; margin: 0 auto 52px;
+  font-size: clamp(.88rem, 1.8vw, 1rem); color: var(--mt2); line-height: 1.9;
+  opacity: 0; animation: fade-in .7s ease 2.3s forwards;
+}
+.h-desc strong { color: var(--wh); font-weight: 600; }
+.h-desc .en { display: block; font-size: .84em; font-style: italic; color: var(--mt); margin-top: 7px; }
+
+.h-btns {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 68px;
+  opacity: 0; animation: fade-in .7s ease 2.5s forwards;
+}
+
+.btn {
+  position: relative; overflow: hidden;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 38px; border-radius: 2px; cursor: none; border: none;
+  font-family: var(--fb); font-size: .8rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  transition: transform .3s var(--ease), box-shadow .3s;
+}
+.btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(255,255,255,.1); transform: scaleX(0); transform-origin: right;
+  transition: transform .35s var(--ease);
+}
+.btn:hover::after { transform: scaleX(1); transform-origin: left; }
+.btn:hover { transform: translateY(-3px); }
+
+.btn-fill {
+  background: linear-gradient(135deg, var(--pu), var(--pk));
+  color: #fff; box-shadow: 0 0 28px rgba(184,79,255,.3);
+}
+.btn-fill:hover { box-shadow: 0 0 50px rgba(255,45,155,.45); }
+
+.btn-ghost {
+  background: transparent; color: var(--cy);
+  border: 1px solid rgba(0,212,245,.35);
+}
+.btn-ghost:hover { border-color: var(--cy); background: rgba(0,212,245,.06); }
+
+/* Scroll indicator */
+.h-scroll {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  opacity: 0; animation: fade-in .6s ease 3s forwards;
+}
+.h-scroll span { font-size: .65rem; letter-spacing: .24em; color: var(--mt); text-transform: uppercase; }
+.scroll-pip {
+  width: 22px; height: 36px; border: 1px solid rgba(255,255,255,.15);
+  border-radius: 11px; position: relative; overflow: hidden;
+}
+.scroll-pip::after {
+  content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+  width: 3px; height: 3px; border-radius: 50%; background: var(--pk);
+  animation: pip 2s ease-in-out infinite;
+}
+@keyframes pip {
+  0%  { top: 6px; opacity: 1; }
+  80% { top: 22px; opacity: 0; }
+  100%{ top: 6px; opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION SKELETON
+═══════════════════════════════════════════════ */
+.sw { max-width: 1140px; margin: 0 auto; padding: 108px 52px; }
+
+.sh { margin-bottom: 64px; }
+.s-num { font-family: var(--fb); font-size: .72rem; letter-spacing: .3em; color: var(--pu); display: block; margin-bottom: 16px; }
+.s-title {
+  font-family: var(--fd); font-size: clamp(2.4rem, 6vw, 4.6rem);
+  letter-spacing: .06em; line-height: 1; margin-bottom: 8px;
+}
+.s-title-en {
+  display: block; font-family: var(--fb); font-size: .42em;
+  font-weight: 300; color: var(--mt); letter-spacing: .14em;
+  text-transform: uppercase; margin-top: 8px;
+}
+.s-line { width: 36px; height: 1px; background: linear-gradient(90deg,var(--pu),var(--cy)); border: none; margin-top: 20px; }
+
+/* Reveal */
+.rev {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .75s var(--ease), transform .75s var(--ease);
+}
+.rev.on { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; }
+.d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+/* Section divider */
+.sec-border { border-top: 1px solid rgba(184,79,255,.1); }
+
+/* ═══════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════ */
+.about-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 80px; align-items: start; }
+
+.about-statement {
+  font-family: var(--fs); font-size: clamp(1.6rem, 3.4vw, 2.45rem);
+  font-weight: 300; line-height: 1.5; color: var(--wh); margin-bottom: 8px;
+}
+.about-statement em {
+  font-style: italic;
+  background: linear-gradient(135deg,var(--pk),var(--pu));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.about-statement-en {
+  font-family: var(--fb); font-size: .85rem; color: var(--mt); font-style: italic;
+  margin-bottom: 28px;
+}
+.about-p { font-size: .9rem; color: var(--mt2); line-height: 1.9; margin-bottom: 14px; }
+.about-p strong { color: var(--wh); font-weight: 600; }
+.concept-tag {
+  display: inline-block; margin-top: 18px;
+  font-family: var(--fd); font-size: 1rem; letter-spacing: .1em;
+  padding: 8px 20px; border-radius: 2px;
+  border: 1px solid rgba(184,79,255,.4); background: rgba(184,79,255,.08); color: var(--pu);
+}
+
+.about-quote {
+  position: relative; padding: 32px 32px 32px 42px; margin-bottom: 28px;
+  background: var(--bg2); border: 1px solid rgba(184,79,255,.12);
+  border-left: 3px solid var(--pu); border-radius: 0 8px 8px 0;
+}
+.about-quote::before {
+  content: '"'; position: absolute; top: 4px; left: 14px;
+  font-family: var(--fs); font-size: 4.5rem; line-height: 1;
+  background: linear-gradient(135deg,var(--pu),var(--pk));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; opacity: .45;
+}
+.about-quote blockquote { font-family: var(--fs); font-size: .92rem; font-style: italic; color: var(--mt2); line-height: 1.9; }
+
+.stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.stat {
+  padding: 22px 14px; text-align: center; border-radius: 4px;
+  background: var(--bg2); border: 1px solid rgba(184,79,255,.1);
+  transition: border-color .3s, transform .3s var(--ease);
+}
+.stat:hover { border-color: rgba(184,79,255,.35); transform: translateY(-3px); }
+.stat-n {
+  font-family: var(--fd); font-size: 2.6rem; letter-spacing: .04em;
+  background: linear-gradient(135deg,var(--cy),var(--pu));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-l { font-size: .7rem; color: var(--mt); letter-spacing: .14em; text-transform: uppercase; margin-top: 3px; }
+
+/* ═══════════════════════════════════════════════
+   MUSIC
+═══════════════════════════════════════════════ */
+#music { background: var(--bg2); }
+
+.vid-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 20px; }
+.vc {
+  background: var(--bg3); border: 1px solid rgba(184,79,255,.1); border-radius: 6px;
+  overflow: hidden; transition: transform .35s var(--ease), border-color .35s, box-shadow .35s;
+}
+.vc:hover {
+  transform: translateY(-7px);
+  border-color: rgba(255,45,155,.4);
+  box-shadow: 0 24px 48px rgba(0,0,0,.45), 0 0 32px rgba(255,45,155,.12);
+}
+.vc iframe { width: 100%; aspect-ratio: 16/9; display: block; border: none; }
+.vc-info { padding: 18px 20px; }
+.vc-title { font-family: var(--fs); font-size: .98rem; font-weight: 700; margin-bottom: 5px; }
+.vc-meta { font-size: .74rem; color: var(--mt); letter-spacing: .04em; }
+
+.rs {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 18px 22px; background: var(--bg3);
+  border: 1px solid rgba(184,79,255,.1); border-radius: 4px;
+}
+.rs-lbl { font-size: .7rem; color: var(--cy); letter-spacing: .16em; text-transform: uppercase; margin-right: 4px; white-space: nowrap; }
+.rs-p {
+  font-size: .74rem; padding: 4px 13px; border-radius: 20px;
+  background: rgba(184,79,255,.1); border: 1px solid rgba(184,79,255,.2);
+  color: var(--mt2); white-space: nowrap;
+  transition: background .2s, color .2s;
+}
+.rs-p:hover { background: rgba(184,79,255,.22); color: var(--wh); }
+
+/* ═══════════════════════════════════════════════
+   PRODUCTIONS
+═══════════════════════════════════════════════ */
+.prod-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+
+.pc {
+  position: relative; overflow: hidden;
+  padding: 36px 32px;
+  background: var(--bg2); border: 1px solid rgba(184,79,255,.1); border-radius: 8px;
+  transition: transform .35s var(--ease), border-color .35s, box-shadow .35s;
+  cursor: none;
+  transform-style: preserve-3d;
+}
+.pc::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--pu), var(--pk), transparent);
+  opacity: 0; transition: opacity .35s;
+}
+.pc::after {
+  content: attr(data-num); position: absolute; bottom: -16px; right: 18px;
+  font-family: var(--fd); font-size: 8rem;
+  color: rgba(255,255,255,.025); line-height: 1; pointer-events: none;
+  transition: color .35s, transform .35s;
+}
+.pc:hover {
+  border-color: rgba(255,45,155,.3);
+  box-shadow: 0 24px 48px rgba(0,0,0,.4), 0 0 40px rgba(184,79,255,.07);
+}
+.pc:hover::before { opacity: 1; }
+.pc:hover::after { color: rgba(255,255,255,.045); transform: translateY(-6px); }
+.pc.wide { grid-column: span 2; }
+
+.pbadge {
+  display: inline-block; font-size: .67rem; letter-spacing: .14em; text-transform: uppercase;
+  padding: 3px 11px; border-radius: 2px; margin-bottom: 18px;
+}
+.b-up   { background: rgba(255,45,155,.12);  color: var(--pk); border: 1px solid rgba(255,45,155,.3); }
+.b-on   { background: rgba(0,212,245,.1);    color: var(--cy); border: 1px solid rgba(0,212,245,.25); }
+.b-done { background: rgba(80,80,128,.12);   color: var(--mt); border: 1px solid rgba(80,80,128,.2); }
+
+.pt { font-family: var(--fs); font-size: 1.35rem; font-weight: 700; margin-bottom: 4px; }
+.pt-sub { font-size: .8rem; color: var(--mt); letter-spacing: .05em; margin-bottom: 18px; }
+
+.ptags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+.ptag {
+  font-size: .7rem; padding: 3px 11px; border-radius: 20px;
+  background: rgba(184,79,255,.08); border: 1px solid rgba(184,79,255,.18); color: var(--pu);
+}
+.pdesc { font-size: .88rem; color: var(--mt2); line-height: 1.85; margin-bottom: 16px; }
+.pdesc-en { font-size: .8rem; font-style: italic; color: var(--mt); }
+.pmeta { font-size: .78rem; color: var(--mt); }
+.pmeta strong { color: var(--mt2); }
+
+/* ═══════════════════════════════════════════════
+   TEAM
+═══════════════════════════════════════════════ */
+#team { background: var(--bg2); }
+.team-grid {
+  display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+}
+.mc { flex: 0 0 calc(25% - 15px); min-width: 200px; }
+
+.mc {
+  padding: 34px 22px; text-align: center;
+  background: var(--bg3); border: 1px solid rgba(184,79,255,.1); border-radius: 8px;
+  transition: transform .35s var(--ease), border-color .35s, box-shadow .35s;
+  cursor: none;
+}
+.mc:hover {
+  transform: translateY(-7px);
+  border-color: rgba(184,79,255,.38);
+  box-shadow: 0 20px 40px rgba(0,0,0,.4), 0 0 30px rgba(184,79,255,.1);
+}
+.av {
+  width: 88px; height: 88px; border-radius: 50%;
+  margin: 0 auto 20px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.av::before {
+  content: ''; position: absolute; inset: -2px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--pu), var(--pk), var(--cy)); z-index: 0;
+}
+.av-inner {
+  position: absolute; inset: 2px; border-radius: 50%; z-index: 1;
+  background: var(--bg3); overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.av-img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  display: block; border-radius: 50%;
+  filter: grayscale(20%);
+  transition: filter 0.3s, transform 0.4s var(--ease);
+}
+.mc:hover .av-img { filter: grayscale(0%); transform: scale(1.06); }
+.av-char {
+  position: relative; z-index: 2; font-family: var(--fs); font-size: 1.55rem; font-weight: 700;
+  background: linear-gradient(135deg,var(--pu),var(--pk));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.mn { font-family: var(--fs); font-size: 1.05rem; font-weight: 700; margin-bottom: 2px; }
+.mn-en { font-size: .72rem; color: var(--mt); letter-spacing: .07em; margin-bottom: 12px; }
+.mr { font-size: .74rem; color: var(--cy); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px; }
+.mb { font-size: .8rem; color: var(--mt2); line-height: 1.75; }
+
+/* ═══════════════════════════════════════════════
+   SHOWS
+═══════════════════════════════════════════════ */
+.shows-list { display: flex; flex-direction: column; gap: 14px; }
+
+.show {
+  display: grid; grid-template-columns: 88px 1fr auto;
+  align-items: center; gap: 32px; padding: 24px 28px;
+  background: var(--bg2); border: 1px solid rgba(184,79,255,.1); border-radius: 6px;
+  transition: border-color .3s, transform .3s var(--ease), box-shadow .3s;
+}
+.show:hover {
+  border-color: rgba(184,79,255,.32); transform: translateX(5px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.show-dt {
+  text-align: center; border-right: 1px solid rgba(184,79,255,.15); padding-right: 28px;
+}
+.sd-mon { font-size: .68rem; letter-spacing: .2em; color: var(--pu); text-transform: uppercase; }
+.sd-day { font-family: var(--fd); font-size: 3rem; line-height: 1; color: var(--wh); }
+.sd-yr  { font-size: .68rem; color: var(--mt); }
+.show-name { font-family: var(--fs); font-size: 1.05rem; font-weight: 700; margin-bottom: 5px; }
+.show-venue { font-size: .82rem; color: var(--mt2); }
+.show-tag {
+  font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 2px; white-space: nowrap;
+}
+.t-conf { background: rgba(0,212,245,.1); color: var(--cy); border: 1px solid rgba(0,212,245,.25); }
+.t-plan { background: rgba(80,80,128,.1); color: var(--mt); border: 1px solid rgba(80,80,128,.2); }
+
+/* ═══════════════════════════════════════════════
+   CONNECT
+═══════════════════════════════════════════════ */
+#connect { background: var(--bg2); text-align: center; }
+
+.conn-sub {
+  font-size: clamp(.9rem,1.8vw,1.05rem); color: var(--mt2);
+  max-width: 480px; margin: 0 auto 52px; line-height: 1.85;
+}
+
+.soc-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 14px; max-width: 680px; margin: 0 auto 36px;
+}
+.sc {
+  padding: 30px 14px; text-align: center;
+  background: var(--bg3); border: 1px solid rgba(184,79,255,.1); border-radius: 8px;
+  cursor: none; transition: transform .35s var(--ease), border-color .35s, box-shadow .35s;
+}
+.sc:hover {
+  transform: translateY(-7px);
+  border-color: rgba(184,79,255,.4);
+  box-shadow: 0 20px 42px rgba(0,0,0,.38), 0 0 30px rgba(184,79,255,.1);
+}
+.sc-ico { font-size: 1.55rem; margin-bottom: 10px; }
+.sc-lbl { font-size: .68rem; color: var(--mt); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 7px; }
+.sc-hdl { font-size: .84rem; font-weight: 600; color: var(--mt2); }
+
+.email-a {
+  font-size: .95rem; color: var(--cy); cursor: none; position: relative;
+}
+.email-a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 1px; background: var(--cy);
+  transform: scaleX(0); transform-origin: right; transition: transform .3s var(--ease);
+}
+.email-a:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer {
+  padding: 30px 52px; border-top: 1px solid rgba(184,79,255,.1);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.f-logo { font-family: var(--fd); font-size: 1rem; letter-spacing: .18em; color: var(--mt); }
+.f-copy { font-size: .74rem; color: var(--mt); letter-spacing: .07em; }
+.f-links { display: flex; gap: 22px; }
+.f-links a { font-size: .72rem; color: var(--mt); letter-spacing: .1em; text-transform: uppercase; cursor: none; transition: color .2s; }
+.f-links a:hover { color: var(--pu); }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   LANGUAGE TOGGLE
+═══════════════════════════════════════════════ */
+.lang-btn {
+  font-size: .69rem; letter-spacing: .16em; text-transform: uppercase;
+  padding: 5px 13px; cursor: none;
+  background: transparent; color: var(--mt2);
+  border: 1px solid rgba(184,79,255,.25); border-radius: 2px;
+  font-family: var(--fb);
+  transition: color .2s, border-color .2s;
+}
+.lang-btn:hover { color: var(--pu); border-color: rgba(184,79,255,.5); }
+.lang-btn.active-en { color: var(--cy); border-color: rgba(0,212,245,.4); }
+.en-text { display: none; }
+html.lang-en .zh-text { display: none; }
+html.lang-en .en-text { display: inline; }
+html.lang-en .en-text.block { display: block; }
+
+/* ═══════════════════════════════════════════════
+   FEATURED VIDEO
+═══════════════════════════════════════════════ */
+.vc-featured {
+  background: var(--bg3); border: 1px solid rgba(184,79,255,.1); border-radius: 6px;
+  overflow: hidden; margin-bottom: 16px;
+  transition: border-color .35s, box-shadow .35s;
+  cursor: none;
+}
+.vc-featured:hover {
+  border-color: rgba(255,45,155,.35);
+  box-shadow: 0 20px 48px rgba(0,0,0,.45), 0 0 32px rgba(255,45,155,.1);
+}
+.vc-featured iframe { width: 100%; aspect-ratio: 16/9; display: block; border: none; }
+.vc-featured .vc-info { padding: 22px 28px; }
+.vc-featured .vc-title { font-size: 1.2rem; }
+.vid-grid-sm { grid-template-columns: repeat(2,1fr); }
+.rs-live {
+  background: rgba(0,212,245,.1); border-color: rgba(0,212,245,.3); color: var(--cy);
+}
+
+/* ═══════════════════════════════════════════════
+   GALLERY
+═══════════════════════════════════════════════ */
+#gallery { background: var(--bg2); }
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 10px; margin-bottom: 40px;
+}
+.gal-slot {
+  aspect-ratio: 4/3;
+  background: var(--bg3); border: 1px solid rgba(184,79,255,.08); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; transition: border-color .3s;
+}
+.gal-slot:hover { border-color: rgba(184,79,255,.25); }
+.gal-ph {
+  font-family: var(--fs); font-size: 1.4rem; font-weight: 300;
+  color: rgba(240,240,255,.07); letter-spacing: .1em; text-align: center; line-height: 1.6;
+  user-select: none;
+}
+.gallery-cta {
+  text-align: center; padding: 12px 0 0;
+  font-size: .9rem; color: var(--mt2); line-height: 2;
+}
+.gallery-cta a { color: var(--pk); }
+.gallery-cta a:hover { text-decoration: underline; }
+
+/* ═══════════════════════════════════════════════
+   CONNECT REDESIGN
+═══════════════════════════════════════════════ */
+.connect-layout {
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: start;
+}
+.bw {
+  background: var(--bg3); border: 1px solid rgba(184,79,255,.18); border-radius: 10px;
+  overflow: hidden;
+}
+.bw-bar {
+  background: var(--bg4); padding: 11px 16px;
+  display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid rgba(184,79,255,.1);
+}
+.bw-dots { display: flex; gap: 6px; flex-shrink: 0; }
+.dot { width: 11px; height: 11px; border-radius: 50%; }
+.dr { background: #ff5f57; } .dy { background: #febc2e; } .dg { background: #28c840; }
+.bw-url-bar {
+  flex: 1; text-align: center;
+  background: rgba(255,255,255,.05); border-radius: 4px;
+  padding: 4px 12px; font-size: .7rem; color: var(--mt); letter-spacing: .04em;
+}
+.bw-open { font-size: .8rem; color: var(--mt); transition: color .2s; cursor: none; flex-shrink: 0; }
+.bw-open:hover { color: var(--cy); }
+.bw-body iframe { width: 100%; aspect-ratio: 16/9; display: block; border: none; }
+.bw-footer {
+  padding: 13px 18px; display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(184,79,255,.08);
+}
+.bw-ch { font-size: .72rem; color: var(--mt2); }
+.bw-sub { font-size: .71rem; color: var(--cy); letter-spacing: .06em; cursor: none; }
+.bw-sub:hover { text-decoration: underline; }
+
+.soc-stack { display: flex; flex-direction: column; gap: 12px; }
+.sc2 {
+  display: block; padding: 18px 20px;
+  background: var(--bg3); border: 1px solid rgba(184,79,255,.1); border-radius: 8px;
+  cursor: none; transition: transform .3s var(--ease), border-color .3s, box-shadow .3s;
+}
+.sc2:hover {
+  transform: translateX(6px);
+  border-color: rgba(184,79,255,.38);
+  box-shadow: 0 10px 30px rgba(0,0,0,.38), 0 0 20px rgba(184,79,255,.08);
+}
+.sc2-head { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.sc2-icon { width: 15px; height: 15px; flex-shrink: 0; color: var(--mt2); }
+.sc2-lbl { font-size: .67rem; letter-spacing: .18em; text-transform: uppercase; color: var(--mt2); flex: 1; }
+.sc2-arr { font-size: .85rem; color: var(--mt); transition: color .2s; }
+.sc2:hover .sc2-arr { color: var(--pk); }
+.sc2-hdl { font-size: .92rem; font-weight: 600; color: var(--wh); }
+.sc2-sub { font-size: .74rem; color: var(--mt); margin-top: 5px; }
+
+.ig-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 3px;
+  border-radius: 4px; overflow: hidden; margin-bottom: 12px;
+}
+.ig-th { aspect-ratio: 1; overflow: hidden; background: var(--bg4); }
+.ig-th img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  filter: grayscale(25%); transition: filter .35s, transform .4s var(--ease);
+}
+.sc2:hover .ig-th img { filter: grayscale(0%); transform: scale(1.06); }
+
+@media (max-width: 1000px) {
+  .sw { padding: 80px 32px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .mc { flex: 0 0 calc(50% - 10px); }
+}
+@media (max-width: 768px) {
+  nav { padding: 16px 22px; }
+  .nav-links { display: none; }
+  .lang-btn { display: none; }
+  .sw { padding: 64px 20px; }
+  .vid-grid { grid-template-columns: 1fr; }
+  .vid-grid-sm { grid-template-columns: 1fr; }
+  .prod-grid { grid-template-columns: 1fr; }
+  .pc.wide { grid-column: span 1; }
+  .soc-grid { grid-template-columns: repeat(2,1fr); }
+  .show { grid-template-columns: 70px 1fr; }
+  .show-tag { display: none; }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); }
+  .connect-layout { grid-template-columns: 1fr; }
+  footer { flex-direction: column; text-align: center; }
+  html { cursor: auto; }
+  #cur, #cur-ring { display: none; }
+}
+@media (max-width: 480px) {
+  .mc { flex: 0 0 calc(50% - 10px); }
+  .stats { grid-template-columns: 1fr 1fr 1fr; }
+}
+  </style>
+</head>
+<body class="loading">
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<!-- PROGRESS -->
+<div id="prog"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-word">FALABIBO</div>
+  <div class="ld-sub">Hakka Futurism · Taiwan</div>
+  <div class="ld-bar"></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">FALABIBO</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#music">Music</a></li>
+    <li><a href="#productions">Productions</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+  <button class="lang-btn" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="h-photo-bg" id="heroBg" style="background-image: url('images/photo-group.jpg');"></div>
+  <div class="h-photo-overlay"></div>
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="aurora a3"></div>
+  <div class="h-grid"></div>
+  <div class="scanlines"></div>
+  <div class="noise"></div>
+  <span class="fc">八</span>
+  <span class="fc">音</span>
+  <span class="fc">客</span>
+  <span class="fc">家</span>
+  <span class="fc">樂</span>
+
+  <div class="hc">
+    <div class="h-eyebrow">Hakka Futurism · 客家未來主義 · Est. 2022</div>
+    <h1 class="h-title" id="htitle">FALABIBO</h1>
+    <p class="h-cn">法 · 拉 · 逼 · 波</p>
+    <p class="h-desc">
+      <span class="zh-text">以<strong>客家八音</strong>為根，融合 Vaporwave、City Pop 與當代音樂語言，創造台灣獨有的聲音。</span>
+      <span class="en-text">Ancient Hakka Pa-yin music, reimagined through Vaporwave &amp; City Pop — from Taiwan.</span>
+    </p>
+    <div class="h-btns">
+      <a href="#music" class="btn btn-fill mag">聆聽音樂 · Listen</a>
+      <a href="#shows" class="btn btn-ghost mag">即將演出 · Shows</a>
+    </div>
+  </div>
+
+  <div class="h-scroll">
+    <span>Scroll</span>
+    <div class="scroll-pip"></div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about" class="sec-border">
+  <div class="sw">
+    <div class="sh rev">
+      <span class="s-num">01 · About</span>
+      <h2 class="s-title">我們是誰<span class="s-title-en">Who We Are</span></h2>
+      <hr class="s-line">
+    </div>
+    <div class="about-grid">
+      <div class="rev d1">
+        <p class="about-statement">保存，<br>即是<em>使用</em>。</p>
+        <p class="about-statement-en">Preservation means use.</p>
+        <p class="about-p"><strong>FALABIBO（法拉逼波）</strong>，成立於 2022 年，是台灣第一個以客家八音為核心語彙、與當代電子音樂風格對話的跨界室內樂團。</p>
+        <p class="about-p">名稱取自客家話，意指「繽紛絢麗、花俏」。我們讓客家八音、傳統弦索、吹場音樂等素材，透過爵士、Funk、Disco、Vaporwave 重新呼吸。</p>
+        <p class="about-p" style="font-size:.83rem; font-style:italic; color:var(--mt);">A Taiwanese chamber ensemble pioneering Hakka Futurism — ancient music for a future audience.</p>
+        <div class="concept-tag"># Hakka Futurism</div>
+      </div>
+      <div class="rev d2">
+        <div class="about-quote">
+          <blockquote class="zh-text">"八音從來不是博物館裡的展品。它是婚禮、廟會、稻田邊的聲音——因為有地方要去，所以有生命。我們只是用不同的工具，繼續這件事。"</blockquote>
+          <blockquote class="en-text block">"Pa-yin was never meant for museum cases. It was the soundtrack to weddings, harvests, and temple nights — music alive because it had somewhere to be. We're just continuing that work, with different tools."</blockquote>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="stat-n">2022</div><div class="stat-l">Founded</div></div>
+          <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Shows</div></div>
+          <div class="stat"><div class="stat-n">4</div><div class="stat-l">Productions</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MUSIC ══ -->
+<section id="music" class="sec-border">
+  <div class="sw">
+    <div class="sh rev">
+      <span class="s-num">02 · Music</span>
+      <h2 class="s-title">最新音樂<span class="s-title-en">Latest Music</span></h2>
+      <hr class="s-line">
+    </div>
+    <div class="vc vc-featured rev d1">
+      <iframe src="https://www.youtube.com/embed/LkE4TqgriWE" title="大開門" allowfullscreen loading="lazy"></iframe>
+      <div class="vc-info">
+        <div class="vc-title">《大開門》</div>
+        <div class="vc-meta">客家八音 大吹場 · Hakka Pa-yin × City Pop · 晴耕雨讀 弄八音</div>
+      </div>
+    </div>
+    <div class="vid-grid vid-grid-sm">
+      <div class="vc rev d2">
+        <iframe src="https://www.youtube.com/embed/JXcLnFMTMyY" title="月光華華" allowfullscreen loading="lazy"></iframe>
+        <div class="vc-info">
+          <div class="vc-title">《月光華華》</div>
+          <div class="vc-meta">客家音樂 現場演出 · 晴耕雨讀 弄八音</div>
+        </div>
+      </div>
+      <div class="vc rev d3">
+        <iframe src="https://www.youtube.com/embed/iCyq_lcnIgE" title="糶酒" allowfullscreen loading="lazy"></iframe>
+        <div class="vc-info">
+          <div class="vc-title">《糶酒》</div>
+          <div class="vc-meta">City Pop × 客家小調 · 晴耕雨讀 弄八音</div>
+        </div>
+      </div>
+    </div>
+    <div class="rs rev">
+      <span class="rs-lbl">晴耕雨讀 全系列 · Jun 2026</span>
+      <span class="rs-p rs-live">6/3 大開門</span>
+      <span class="rs-p rs-live">6/7 月光華華</span>
+      <span class="rs-p rs-live">6/10 糶酒</span>
+      <span class="rs-p">6/14 思戀歌</span>
+      <span class="rs-p">6/17 搖擺弦索</span>
+      <span class="rs-p">6/21 新剪剪花</span>
+      <span class="rs-p">6/24 月光緣</span>
+      <span class="rs-p">6/28 團圓</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCTIONS ══ -->
+<section id="productions" class="sec-border">
+  <div class="sw">
+    <div class="sh rev">
+      <span class="s-num">03 · Productions</span>
+      <h2 class="s-title">製作歷史<span class="s-title-en">Our Productions</span></h2>
+      <hr class="s-line">
+    </div>
+    <div class="prod-grid">
+
+      <!-- 客氣波 FEATURED -->
+      <div class="pc wide rev" data-num="IV">
+        <span class="pbadge b-up">即將演出 · Upcoming 2026</span>
+        <div class="pt">《客氣波 Hakka Wave》</div>
+        <div class="pt-sub">Hakka Pa-yin × Vaporwave × City Pop · 2026</div>
+        <div class="ptags">
+          <span class="ptag">Vaporwave</span>
+          <span class="ptag">City Pop</span>
+          <span class="ptag">客家八音</span>
+          <span class="ptag">feat. BENN</span>
+        </div>
+        <p class="pdesc zh-text">八音的溫潤與憂愁，換上了霓虹的衣裳。與製作人 BENN（Over My Body 廠牌）合作，傳統嗩吶與二胡的音色穿越蒸汽波的夢境聲景，那些留在老照片裡的聲音，在這裡找到了它們的當代形狀。</p>
+        <p class="pdesc en-text block">Hakka Pa-yin's warmth and yearning, dressed in neon. Co-produced with BENN (Over My Body label) — traditional suona and erhu timbres reshaped into a vaporwave dreamscape.</p>
+        <div class="pmeta">演出：<strong>2026 / 9 / 5 · 國立臺灣大學 · 台北</strong></div>
+      </div>
+
+      <!-- 晴耕雨讀 -->
+      <div class="pc rev d1" data-num="III">
+        <span class="pbadge b-on">進行中</span>
+        <div class="pt">《晴耕雨讀 弄八音》</div>
+        <div class="pt-sub">Hakka Pa-yin × City Pop / Jazz · 2025–2026</div>
+        <div class="ptags">
+          <span class="ptag">City Pop</span><span class="ptag">Jazz</span><span class="ptag">Latin</span><span class="ptag">客家八音</span>
+        </div>
+        <p class="pdesc zh-text">八首客家八音核心曲目，以 City Pop、Jazz 與 Latin 重新詮釋。《大開門》《月光華華》《糶酒》《思戀歌》《搖擺弦索》《新剪剪花》《月光緣》《團圓》——2026 年六月全系列影片連載。</p>
+        <p class="pdesc en-text block">Eight Hakka Pa-yin classics reimagined through City Pop, Jazz & Latin. Complete 8-part YouTube series releasing June 2026.</p>
+        <div class="pmeta">演出：<strong>台南 · 新北 · 基隆（規劃中）</strong></div>
+      </div>
+
+      <!-- 童謠遊樂園 -->
+      <div class="pc rev d2" data-num="II">
+        <span class="pbadge b-on">巡演中</span>
+        <div class="pt">《童謠遊樂園》</div>
+        <div class="pt-sub">World Children's Folk × Interactive · 2025–2026</div>
+        <div class="ptags">
+          <span class="ptag">互動音樂會</span><span class="ptag">親子</span><span class="ptag">世界民謠</span>
+        </div>
+        <p class="pdesc zh-text">帶孩子聽見世界——以客家八音重新編奏全球兒童民謠。文化部基層展演補助製作，已完成苗栗、台南、桃園三地巡演。</p>
+        <p class="pdesc en-text block">Global children's folk songs through the lens of Hakka Pa-yin. A Ministry of Culture-funded touring production performed across Miaoli, Tainan & Taoyuan.</p>
+        <div class="pmeta">演出：<strong>苗栗 · 台南 · 桃園（2026/4 完成）</strong></div>
+      </div>
+
+      <!-- 萬花筒 -->
+      <div class="pc rev d3" data-num="I">
+        <span class="pbadge b-done">已完成</span>
+        <div class="pt">《萬花筒 Mangekyo》</div>
+        <div class="pt-sub">World Folk Songs × Hakka Pa-yin · 2023–2024</div>
+        <div class="ptags">
+          <span class="ptag">World Music</span><span class="ptag">客家八音</span><span class="ptag">原住民</span>
+        </div>
+        <p class="pdesc zh-text">FALABIBO 的起點。以世界各地民謠為材料，探索文化相遇的聲響可能。2023 年宜蘭演藝廳世界首演，開啟了一個樂團的聲音旅程。</p>
+        <p class="pdesc en-text block">The beginning. World folk songs as raw material, exploring the sound of cultures in conversation. World premiere at Yilan Arts Center, 2023.</p>
+        <div class="pmeta">演出：<strong>宜蘭 · 台南 · 新北（共 3 場）</strong></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAM ══ -->
+<section id="team" class="sec-border">
+  <div class="sw">
+    <div class="sh rev">
+      <span class="s-num">04 · Team</span>
+      <h2 class="s-title">核心成員<span class="s-title-en">Core Members</span></h2>
+      <hr class="s-line">
+    </div>
+    <div class="team-grid">
+      <div class="mc rev d1">
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-zhuzhimin.jpg" alt="朱哲民"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>朱</span>')">
+          </div>
+        </div>
+        <div class="mn">朱哲民</div>
+        <div class="mn-en">Zhu Zhe-min</div>
+        <div class="mr">嗩吶 · 笛 · Artistic Director</div>
+        <div class="mb">師大指揮碩士，南藝大嗩吶、指揮、鋼琴三主修畢業。師承人間國寶鄭榮興，現為文資局客家八音傳習藝生。台灣唯一跨足西洋古典、國樂、台灣傳統音樂三領域的嗩吶演奏者。</div>
+      </div>
+      <div class="mc rev d2">
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-chenyoujia.jpg" alt="陳宥嘉"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>陳</span>')">
+          </div>
+        </div>
+        <div class="mn">陳宥嘉</div>
+        <div class="mn-en">Chen You-jia</div>
+        <div class="mr">二胡 · Erhu</div>
+        <div class="mb">北教大音樂系指揮碩士。2021 年二胡與管弦樂指揮雙主修畢業於南藝大。NCO 臺灣國樂團特約演奏員。2020 年「南藝之星」第一名，2016 年入圍 NCO 胡琴新秀選拔最年輕入圍者。</div>
+      </div>
+      <div class="mc rev d3">
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-tsaihanjie.jpg" alt="蔡函潔"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>蔡</span>')">
+          </div>
+        </div>
+        <div class="mn">蔡函潔</div>
+        <div class="mn-en">Tsai Han-jie</div>
+        <div class="mr">Electric Bass · 行政總監</div>
+        <div class="mb">藝文專案企劃，10 年跨足音樂、出版、藝文產業。曾協助金曲獎入圍歌手雷擎企劃執行經紀；光球音樂祭統籌與行銷負責人。</div>
+      </div>
+      <div class="mc rev d4">
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-zhuangjunfu.jpg" alt="莊鈞復"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>莊</span>')">
+          </div>
+        </div>
+        <div class="mn">莊鈞復</div>
+        <div class="mn-en">Zhuang Jun-fu</div>
+        <div class="mr">傳統打擊 · 八音嗩吶</div>
+        <div class="mb">臺灣戲曲學院 + 臺藝大碩士。長年隨榮興客家採茶劇團與陳家班北管八音團巡演，足跡從廟埕到國家劇院，同為鄭榮興老師傳習藝生。</div>
+      </div>
+      <div class="mc rev d1">
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-lihaowen.jpg" alt="李浩恩"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>李</span>')">
+          </div>
+        </div>
+        <div class="mn">李浩恩</div>
+        <div class="mn-en">Li Hao-en</div>
+        <div class="mr">鋼琴 · Piano / Composer</div>
+        <div class="mb">生於馬來西亞，北藝大音樂系理論作曲兼修鋼琴。作品《燼》獲 TSMC × NSO × TNUA「一分鐘交響曲計畫」，由國家交響樂團於國家音樂廳發表。2024 年關渡新聲優勝，以《Nostalgia》發表。</div>
+      </div>
+      <div class="mc rev d2">
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-chenyourong.jpg" alt="陳宥融"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>陳</span>')">
+          </div>
+        </div>
+        <div class="mn">陳宥融 ARIS</div>
+        <div class="mn-en">Chen You-rong</div>
+        <div class="mr">爵士鼓 · Jazz Drums</div>
+        <div class="mb">YAMAHA Taiwan 爵士鼓音樂家、美國 Soultone Cymbals Artist。RockSchool 國際認證 Grade 8 Pass With Distinction，曾就讀美國 Musicians Institute 音樂學院。</div>
+      </div>
+      <div class="mc rev d3">
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-caian.jpg" alt="蔡安"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>蔡</span>')">
+          </div>
+        </div>
+        <div class="mn">蔡安</div>
+        <div class="mn-en">Tsai An</div>
+        <div class="mr">打擊 · Percussion / Asalato</div>
+        <div class="mb">南藝大中國音樂學系碩士，主修打擊。跨習京劇鑼鼓、Asalato、甘美朗，打擊語彙橫跨東亞與非洲。2017 年全中國青少年打擊樂賽個人青年組第三名。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SHOWS ══ -->
+<section id="shows" class="sec-border">
+  <div class="sw">
+    <div class="sh rev">
+      <span class="s-num">05 · Shows</span>
+      <h2 class="s-title">即將演出<span class="s-title-en">Upcoming Shows</span></h2>
+      <hr class="s-line">
+    </div>
+    <div class="shows-list">
+      <div class="show rev d1">
+        <div class="show-dt">
+          <div class="sd-mon">Sep</div>
+          <div class="sd-day">05</div>
+          <div class="sd-yr">2026</div>
+        </div>
+        <div class="show-inf">
+          <div class="show-name">《客氣波 Hakka Wave》</div>
+          <div class="show-venue">國立臺灣大學 · 台北 &nbsp;·&nbsp; Hakka Pa-yin × Vaporwave × City Pop</div>
+        </div>
+        <span class="show-tag t-conf">Confirmed</span>
+      </div>
+      <div class="show rev d2">
+        <div class="show-dt">
+          <div class="sd-mon">Nov</div>
+          <div class="sd-day">14</div>
+          <div class="sd-yr">2026</div>
+        </div>
+        <div class="show-inf">
+          <div class="show-name">《晴耕雨讀 弄八音》基隆場</div>
+          <div class="show-venue">基隆 · 客家八音 × City Pop / Jazz</div>
+        </div>
+        <span class="show-tag t-plan">Planning</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GALLERY ══ -->
+<section id="gallery" class="sec-border">
+  <div class="sw">
+    <div class="sh rev">
+      <span class="s-num">06 · Gallery</span>
+      <h2 class="s-title">演出影像<span class="s-title-en">Live Photography</span></h2>
+      <hr class="s-line">
+    </div>
+    <div class="gallery-grid">
+      <div class="gal-slot rev d1"><div class="gal-ph">演<br>出</div></div>
+      <div class="gal-slot rev d2"><div class="gal-ph">現<br>場</div></div>
+      <div class="gal-slot rev d3"><div class="gal-ph">八<br>音</div></div>
+      <div class="gal-slot rev d1"><div class="gal-ph">客<br>家</div></div>
+      <div class="gal-slot rev d2"><div class="gal-ph">聲<br>響</div></div>
+      <div class="gal-slot rev d3"><div class="gal-ph">樂<br>團</div></div>
+    </div>
+    <div class="gallery-cta rev">
+      <span class="zh-text">照片持續更新中，關注我們的 Instagram 獲取最新演出影像。</span>
+      <span class="en-text">Photos coming soon. Follow us on Instagram for the latest live photography.</span>
+      <br><br>
+      <a href="https://www.instagram.com/falabibo_/" target="_blank" rel="noopener" class="btn btn-ghost mag" style="display:inline-flex; cursor:none;">@falabibo_ on Instagram</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONNECT ══ -->
+<section id="connect" class="sec-border">
+  <div class="sw">
+    <div class="sh rev" style="text-align:center;">
+      <span class="s-num" style="display:block;text-align:center;">07 · Connect</span>
+      <h2 class="s-title" style="text-align:center;">聯絡我們<span class="s-title-en">Get in Touch</span></h2>
+      <hr class="s-line" style="margin:20px auto 0;">
+    </div>
+    <p class="conn-sub rev" style="text-align:center;">
+      <span class="zh-text">演出邀約、媒體採訪、合作提案，歡迎來信。</span>
+      <span class="en-text">Bookings, press &amp; collaboration inquiries welcome.</span>
+    </p>
+
+    <div class="connect-layout rev">
+
+      <!-- 左：瀏覽器預覽窗 × YouTube -->
+      <div class="bw-wrap d1">
+        <div class="bw">
+          <div class="bw-bar">
+            <div class="bw-dots">
+              <span class="dot dr"></span>
+              <span class="dot dy"></span>
+              <span class="dot dg"></span>
+            </div>
+            <div class="bw-url-bar">youtube.com/@falabibo</div>
+            <a class="bw-open" href="https://www.youtube.com/@falabibo" target="_blank" rel="noopener">↗</a>
+          </div>
+          <div class="bw-body">
+            <iframe src="https://www.youtube.com/embed/LkE4TqgriWE?rel=0&modestbranding=1&color=white" title="FALABIBO · 大開門" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="bw-footer">
+            <span class="bw-ch">FALABIBO · Hakka Futurism · Taiwan</span>
+            <a class="bw-sub" href="https://www.youtube.com/@falabibo" target="_blank" rel="noopener">訂閱頻道 Subscribe ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右：社群卡片 -->
+      <div class="soc-stack">
+
+        <!-- Instagram + 相片牆預覽 -->
+        <a class="sc2 d2" href="https://www.instagram.com/falabibo_/" target="_blank" rel="noopener">
+          <div class="sc2-head">
+            <svg class="sc2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            <span class="sc2-lbl">Instagram</span>
+            <span class="sc2-arr">↗</span>
+          </div>
+          <div class="ig-grid">
+            <div class="ig-th"><img src="images/photo-zhuzhimin.jpg" alt="" loading="lazy"></div>
+            <div class="ig-th"><img src="images/photo-chenyoujia.jpg" alt="" loading="lazy"></div>
+            <div class="ig-th"><img src="images/photo-tsaihanjie.jpg" alt="" loading="lazy"></div>
+            <div class="ig-th"><img src="images/photo-zhuangjunfu.jpg" alt="" loading="lazy"></div>
+            <div class="ig-th"><img src="images/photo-chenyourong.jpg" alt="" loading="lazy"></div>
+            <div class="ig-th"><img src="images/photo-caian.jpg" alt="" loading="lazy"></div>
+          </div>
+          <div class="sc2-hdl">@falabibo_</div>
+        </a>
+
+        <!-- Facebook -->
+        <a class="sc2 d3" href="https://www.facebook.com/falabibo519/" target="_blank" rel="noopener">
+          <div class="sc2-head">
+            <svg class="sc2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            <span class="sc2-lbl">Facebook</span>
+            <span class="sc2-arr">↗</span>
+          </div>
+          <div class="sc2-hdl">falabibo519</div>
+        </a>
+
+        <!-- Email -->
+        <a class="sc2 d4" href="mailto:falabibo519@gmail.com">
+          <div class="sc2-head">
+            <svg class="sc2-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span class="sc2-lbl">Email</span>
+          </div>
+          <div class="sc2-hdl">falabibo519@gmail.com</div>
+          <div class="sc2-sub">
+            <span class="zh-text">演出邀約 · 媒體採訪 · 合作提案</span>
+            <span class="en-text">Bookings · Press · Collaboration</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="f-logo">FALABIBO</div>
+  <div class="f-copy">© 2026 FALABIBO · 法拉逼波 · Hakka Futurism · Taiwan</div>
+  <div class="f-links">
+    <a href="https://www.facebook.com/falabibo519/" target="_blank" rel="noopener">FB</a>
+    <a href="https://www.instagram.com/falabibo_/" target="_blank" rel="noopener">IG</a>
+    <a href="https://www.youtube.com/@falabibo" target="_blank" rel="noopener">YT</a>
+  </div>
+</footer>
+
+<script>
+/* ── CURSOR ── */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+});
+
+(function tickRing() {
+  rx += (mx - rx) * 0.11;
+  ry += (my - ry) * 0.11;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(tickRing);
+})();
+
+/* ── HERO PHOTO BACKGROUND ── */
+const heroBg = document.getElementById('heroBg');
+if (heroBg) {
+  const img = new Image();
+  img.onload = () => heroBg.classList.add('loaded');
+  img.src = 'images/photo-group.jpg';
+}
+
+/* ── LOADER ── */
+function hideLoader() {
+  document.getElementById('loader').classList.add('out');
+  document.body.classList.remove('loading');
+}
+window.addEventListener('load', () => setTimeout(hideLoader, 1700));
+setTimeout(hideLoader, 3200); // fallback
+
+/* ── SCROLL PROGRESS ── */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  prog.style.width = (window.scrollY / (document.body.scrollHeight - innerHeight) * 100) + '%';
+}, { passive: true });
+
+/* ── NAV STUCK ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('stuck', window.scrollY > 60);
+}, { passive: true });
+
+/* ── SCROLL REVEAL ── */
+const revEls = document.querySelectorAll('.rev');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+revEls.forEach(el => io.observe(el));
+
+/* ── MAGNETIC BUTTONS ── */
+document.querySelectorAll('.mag').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    const dx = (e.clientX - r.left - r.width  / 2) * 0.25;
+    const dy = (e.clientY - r.top  - r.height / 2) * 0.25;
+    btn.style.transform = `translate(${dx}px,${dy}px)`;
+  });
+  btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+});
+
+/* ── 3D CARD TILT ── */
+document.querySelectorAll('.pc, .mc').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left, y = e.clientY - r.top;
+    const tx =  ((y - r.height / 2) / r.height) * 6;
+    const ty = -((x - r.width  / 2) / r.width)  * 6;
+    card.style.transform = `perspective(900px) rotateX(${tx}deg) rotateY(${ty}deg) translateY(-5px)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+/* ── HERO TEXT SCRAMBLE ── */
+class Scramble {
+  constructor(el) {
+    this.el = el;
+    this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    this.tick = this.tick.bind(this);
+  }
+  set(text) {
+    this.q = text.split('').map((to, i) => ({
+      to, from: to, start: Math.floor(Math.random() * 10),
+      end: 10 + Math.floor(Math.random() * 14), char: ''
+    }));
+    this.f = 0;
+    cancelAnimationFrame(this.raf);
+    this.tick();
+  }
+  tick() {
+    let out = ''; let done = 0;
+    for (const item of this.q) {
+      if (this.f >= item.end) { out += item.to; done++; }
+      else if (this.f >= item.start) {
+        if (!item.char || Math.random() < 0.3)
+          item.char = this.chars[Math.floor(Math.random() * this.chars.length)];
+        out += `<span style="color:var(--pu);opacity:.7">${item.char}</span>`;
+      } else { out += item.from; }
+    }
+    this.el.innerHTML = out;
+    if (done < this.q.length) { this.f++; this.raf = requestAnimationFrame(this.tick); }
+  }
+}
+
+setTimeout(() => {
+  const el = document.getElementById('htitle');
+  if (el) new Scramble(el).set('FALABIBO');
+}, 1900);
+
+/* ── LANGUAGE TOGGLE ── */
+function toggleLang() {
+  const isEn = document.documentElement.classList.toggle('lang-en');
+  const btn = document.getElementById('lang-btn');
+  btn.textContent = isEn ? '中文' : 'EN';
+  btn.classList.toggle('active-en', isEn);
+}
+</script>
+</body>
+</html>
