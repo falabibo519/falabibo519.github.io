@@ -170,9 +170,9 @@ nav.stuck {
   position: absolute; inset: 0; z-index: 0;
   background: linear-gradient(
     135deg,
-    rgba(5,5,9,0.82) 0%,
-    rgba(5,5,9,0.55) 50%,
-    rgba(5,5,9,0.75) 100%
+    rgba(5,5,9,0.72) 0%,
+    rgba(5,5,9,0.40) 50%,
+    rgba(5,5,9,0.65) 100%
   );
 }
 
@@ -842,6 +842,82 @@ html.lang-en .en-text.block { display: block; }
   .mc { flex: 0 0 calc(50% - 10px); }
   .stats { grid-template-columns: 1fr 1fr 1fr; }
 }
+
+/* ═══════════════════════════════════════════════
+   CREDIBILITY STRIP
+═══════════════════════════════════════════════ */
+.cred-strip {
+  background: rgba(9,9,26,.97);
+  border-bottom: 1px solid rgba(184,79,255,.1);
+  padding: 13px 56px;
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.cred-label-main {
+  font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--pu); white-space: nowrap;
+  padding-right: 14px; border-right: 1px solid rgba(184,79,255,.25);
+  flex-shrink: 0;
+}
+.cred-item { font-size: .72rem; color: var(--mt2); letter-spacing: .05em; white-space: nowrap; }
+.cred-sep { color: var(--mt); opacity: .35; }
+.cred-badge {
+  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: 2px 10px; border-radius: 2px;
+  background: rgba(0,212,245,.08); border: 1px solid rgba(0,212,245,.22); color: var(--cy);
+  white-space: nowrap; margin-left: 4px;
+}
+@media (max-width: 768px) { .cred-strip { padding: 12px 20px; gap: 10px; } }
+
+/* ═══════════════════════════════════════════════
+   JOURNEY / TIMELINE
+═══════════════════════════════════════════════ */
+#journey { background: var(--bg3); }
+.timeline { position: relative; max-width: 800px; }
+.timeline::before {
+  content: ''; position: absolute; left: 68px; top: 20px; bottom: 20px; width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(184,79,255,.5) 20%, rgba(255,45,155,.4) 80%, transparent);
+}
+.tl-item {
+  display: grid; grid-template-columns: 68px 1fr;
+  column-gap: 52px; padding: 36px 0; position: relative;
+}
+.tl-item:not(:last-child) { border-bottom: 1px solid rgba(184,79,255,.07); }
+.tl-dot {
+  position: absolute; left: 68px; top: 46px;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--pu), var(--pk));
+  transform: translateX(-50%); z-index: 1;
+  box-shadow: 0 0 14px rgba(184,79,255,.55);
+}
+.tl-year {
+  font-family: var(--fd); font-size: 1.9rem; letter-spacing: .04em; line-height: 1.3;
+  text-align: right;
+  background: linear-gradient(135deg, var(--cy) 0%, var(--pu) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.tl-title {
+  font-family: var(--fs); font-size: 1.08rem; font-weight: 700;
+  color: var(--wh); margin-bottom: 9px;
+}
+.tl-desc { font-size: .87rem; color: var(--mt2); line-height: 1.85; }
+.tl-badge {
+  display: inline-flex; align-items: center; margin-top: 11px;
+  font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 2px;
+  background: rgba(0,212,245,.08); border: 1px solid rgba(0,212,245,.22); color: var(--cy);
+}
+@media (max-width: 768px) {
+  .timeline::before { left: 52px; }
+  .tl-item { grid-template-columns: 52px 1fr; column-gap: 32px; }
+  .tl-dot { left: 52px; }
+  .tl-year { font-size: 1.4rem; }
+}
+
+/* Team card updates */
+.av { width: 130px !important; height: 130px !important; }
+.mc { flex: 0 0 calc(33.33% - 14px) !important; min-width: 240px !important; }
+@media (max-width: 1000px) { .mc { flex: 0 0 calc(50% - 10px) !important; } }
+@media (max-width: 480px) { .mc { flex: 0 0 100% !important; } }
   </style>
 </head>
 <body class="loading">
@@ -865,11 +941,10 @@ html.lang-en .en-text.block { display: block; }
   <a href="#hero" class="nav-logo">FALABIBO</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#music">Music</a></li>
-    <li><a href="#productions">Productions</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#music">Works</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#shows">Shows</a></li>
-    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#connect">Connect</a></li>
   </ul>
   <button class="lang-btn" id="lang-btn" onclick="toggleLang()">EN</button>
@@ -911,6 +986,21 @@ html.lang-en .en-text.block { display: block; }
   </div>
 </section>
 
+<!-- ══ CREDIBILITY STRIP ══ -->
+<div class="cred-strip rev">
+  <span class="cred-label-main">曾演出於</span>
+  <span class="cred-item">宜蘭演藝廳</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">新北藝文中心</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">台南文化中心</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">國立臺灣大學</span>
+  <span class="cred-sep">·</span>
+  <span class="cred-item">苗栗 · 桃園</span>
+  <span class="cred-badge">文化部 基層展演補助</span>
+</div>
+
 <!-- ══ ABOUT ══ -->
 <section id="about" class="sec-border">
   <div class="sw">
@@ -939,6 +1029,63 @@ html.lang-en .en-text.block { display: block; }
           <div class="stat"><div class="stat-n">4</div><div class="stat-l">Productions</div></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ JOURNEY / TIMELINE ══ -->
+<section id="journey" class="sec-border">
+  <div class="sw">
+    <div class="sh rev">
+      <span class="s-num">· Journey</span>
+      <h2 class="s-title">樂團歷程<span class="s-title-en">Our Journey</span></h2>
+      <hr class="s-line">
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item rev">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2022</div>
+        <div class="tl-content">
+          <div class="tl-title">FALABIBO 成立</div>
+          <div class="tl-desc zh-text">以客家八音為核心語彙，匯聚傳統器樂、爵士、電子音樂領域的演奏家，在台灣建立獨一無二的「客家未來主義」音樂品牌。從廟埕到當代劇場，讓八音繼續活在這個時代。</div>
+          <div class="tl-desc en-text block">Founded with a mission to reframe Hakka Pa-yin for contemporary ears — bringing together traditional instrumentalists, jazz musicians, and electronic producers under one roof.</div>
+        </div>
+      </div>
+
+      <div class="tl-item rev d1">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023</div>
+        <div class="tl-content">
+          <div class="tl-title">《萬花筒 Mangekyo》世界首演</div>
+          <div class="tl-desc zh-text">宜蘭演藝廳世界首演，開啟 FALABIBO 的第一個製作。以世界各地民謠為原料，探索文化相遇的聲響可能。完成宜蘭、台南、新北三城市巡演共 3 場。</div>
+          <div class="tl-desc en-text block">World premiere at Yilan Arts Center. Three-city tour across Taiwan — Yilan, Tainan, New Taipei — exploring world folk songs through a Hakka Pa-yin lens.</div>
+          <span class="tl-badge">World Premiere · 宜蘭演藝廳</span>
+        </div>
+      </div>
+
+      <div class="tl-item rev d2">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2025</div>
+        <div class="tl-content">
+          <div class="tl-title">《晴耕雨讀 弄八音》× 文化部補助</div>
+          <div class="tl-desc zh-text">獲文化部基層展演補助，推出第三個製作。八首客家八音核心曲目，以 City Pop、Jazz 與 Latin 重新詮釋。同年完成《童謠遊樂園》苗栗、台南、桃園三地巡演。</div>
+          <div class="tl-desc en-text block">Ministry of Culture-funded production. Eight Hakka Pa-yin classics reimagined through City Pop, Jazz & Latin. Also completed a three-city children's music tour.</div>
+          <span class="tl-badge">文化部 基層展演補助</span>
+        </div>
+      </div>
+
+      <div class="tl-item rev d3">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2026</div>
+        <div class="tl-content">
+          <div class="tl-title">《客氣波 Hakka Wave》× BENN</div>
+          <div class="tl-desc zh-text">與製作人 BENN（Over My Body 廠牌）跨界合作。傳統嗩吶與二胡的音色穿越蒸汽波聲景，帶八音走進全新的聆聽世代。9月5日國立臺灣大學首演。</div>
+          <div class="tl-desc en-text block">Cross-genre collaboration with producer BENN (Over My Body). Traditional suona and erhu timbres reshape into a vaporwave dreamscape. Premiere at National Taiwan University, September 5.</div>
+          <span class="tl-badge">即將演出 · Sep 2026</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1455,6 +1602,18 @@ setTimeout(() => {
   const el = document.getElementById('htitle');
   if (el) new Scramble(el).set('FALABIBO');
 }, 1900);
+
+/* ── HERO PARALLAX ── */
+(function() {
+  const bg = document.getElementById('heroBg');
+  if (!bg) return;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < window.innerHeight * 1.2) {
+      bg.style.transform = 'translateY(' + (y * 0.38) + 'px)';
+    }
+  }, { passive: true });
+})();
 
 /* ── LANGUAGE TOGGLE ── */
 function toggleLang() {
