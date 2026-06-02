@@ -918,6 +918,39 @@ html.lang-en .en-text.block { display: block; }
 .mc { flex: 0 0 calc(33.33% - 14px) !important; min-width: 240px !important; }
 @media (max-width: 1000px) { .mc { flex: 0 0 calc(50% - 10px) !important; } }
 @media (max-width: 480px) { .mc { flex: 0 0 100% !important; } }
+
+/* ═══════════════════════════════════════════════
+   TEAM TABS
+═══════════════════════════════════════════════ */
+.team-tabs {
+  display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 44px;
+}
+.team-tab {
+  font-family: var(--fb); font-size: .72rem; letter-spacing: .12em;
+  text-transform: uppercase; padding: 8px 20px; border-radius: 2px;
+  cursor: none; border: 1px solid rgba(184,79,255,.2); color: var(--mt2);
+  background: transparent; transition: all .25s var(--ease);
+}
+.team-tab:hover { border-color: rgba(184,79,255,.45); color: var(--wh); }
+.team-tab.active {
+  background: rgba(184,79,255,.15); border-color: var(--pu); color: var(--pu);
+}
+.mc.hidden { display: none !important; }
+.mc { transition: opacity .3s ease; }
+.team-empty {
+  width: 100%; padding: 52px 32px; text-align: center;
+  font-size: .88rem; color: var(--mt); font-style: italic;
+  border: 1px dashed rgba(184,79,255,.18); border-radius: 8px;
+  display: none; background: var(--bg3);
+}
+.team-empty.visible { display: block; }
+.team-empty strong { color: var(--mt2); font-style: normal; }
+.mc-cat-badge {
+  display: inline-block; font-size: .6rem; letter-spacing: .14em;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 2px;
+  margin-bottom: 14px;
+  background: rgba(184,79,255,.08); border: 1px solid rgba(184,79,255,.18); color: var(--pu);
+}
   </style>
 </head>
 <body class="loading">
@@ -1212,8 +1245,20 @@ html.lang-en .en-text.block { display: block; }
       <h2 class="s-title">核心成員<span class="s-title-en">Core Members</span></h2>
       <hr class="s-line">
     </div>
+
+    <!-- Category tabs -->
+    <div class="team-tabs">
+      <button class="team-tab active" data-filter="all">全部 · All</button>
+      <button class="team-tab" data-filter="band">樂團樂手</button>
+      <button class="team-tab" data-filter="guest">特邀合作樂手</button>
+      <button class="team-tab" data-filter="composer-res">駐團作曲家</button>
+      <button class="team-tab" data-filter="composer-col">合作作曲家</button>
+      <button class="team-tab" data-filter="admin">行政團員</button>
+    </div>
+
     <div class="team-grid">
-      <div class="mc rev d1">
+      <div class="mc rev d1" data-cat="band">
+        <div class="mc-cat-badge">樂團樂手</div>
         <div class="av">
           <div class="av-inner">
             <img class="av-img" src="images/photo-zhuzhimin.jpg" alt="朱哲民"
@@ -1225,7 +1270,8 @@ html.lang-en .en-text.block { display: block; }
         <div class="mr">嗩吶 · 笛 · Artistic Director</div>
         <div class="mb">師大指揮碩士，南藝大嗩吶、指揮、鋼琴三主修畢業。師承人間國寶鄭榮興，現為文資局客家八音傳習藝生。台灣唯一跨足西洋古典、國樂、台灣傳統音樂三領域的嗩吶演奏者。</div>
       </div>
-      <div class="mc rev d2">
+      <div class="mc rev d2" data-cat="band">
+        <div class="mc-cat-badge">樂團樂手</div>
         <div class="av">
           <div class="av-inner">
             <img class="av-img" src="images/photo-chenyoujia.jpg" alt="陳宥嘉"
@@ -1237,19 +1283,8 @@ html.lang-en .en-text.block { display: block; }
         <div class="mr">二胡 · Erhu</div>
         <div class="mb">北教大音樂系指揮碩士。2021 年二胡與管弦樂指揮雙主修畢業於南藝大。NCO 臺灣國樂團特約演奏員。2020 年「南藝之星」第一名，2016 年入圍 NCO 胡琴新秀選拔最年輕入圍者。</div>
       </div>
-      <div class="mc rev d3">
-        <div class="av">
-          <div class="av-inner">
-            <img class="av-img" src="images/photo-tsaihanjie.jpg" alt="蔡函潔"
-              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>蔡</span>')">
-          </div>
-        </div>
-        <div class="mn">蔡函潔</div>
-        <div class="mn-en">Tsai Han-jie</div>
-        <div class="mr">Electric Bass · 行政總監</div>
-        <div class="mb">藝文專案企劃，10 年跨足音樂、出版、藝文產業。曾協助金曲獎入圍歌手雷擎企劃執行經紀；光球音樂祭統籌與行銷負責人。</div>
-      </div>
-      <div class="mc rev d4">
+      <div class="mc rev d3" data-cat="band">
+        <div class="mc-cat-badge">樂團樂手</div>
         <div class="av">
           <div class="av-inner">
             <img class="av-img" src="images/photo-zhuangjunfu.jpg" alt="莊鈞復"
@@ -1261,19 +1296,8 @@ html.lang-en .en-text.block { display: block; }
         <div class="mr">傳統打擊 · 八音嗩吶</div>
         <div class="mb">臺灣戲曲學院 + 臺藝大碩士。長年隨榮興客家採茶劇團與陳家班北管八音團巡演，足跡從廟埕到國家劇院，同為鄭榮興老師傳習藝生。</div>
       </div>
-      <div class="mc rev d1">
-        <div class="av">
-          <div class="av-inner">
-            <img class="av-img" src="images/photo-lihaowen.jpg" alt="李浩恩"
-              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>李</span>')">
-          </div>
-        </div>
-        <div class="mn">李浩恩</div>
-        <div class="mn-en">Li Hao-en</div>
-        <div class="mr">鋼琴 · Piano / Composer</div>
-        <div class="mb">生於馬來西亞，北藝大音樂系理論作曲兼修鋼琴。作品《燼》獲 TSMC × NSO × TNUA「一分鐘交響曲計畫」，由國家交響樂團於國家音樂廳發表。2024 年關渡新聲優勝，以《Nostalgia》發表。</div>
-      </div>
-      <div class="mc rev d2">
+      <div class="mc rev d4" data-cat="band">
+        <div class="mc-cat-badge">樂團樂手</div>
         <div class="av">
           <div class="av-inner">
             <img class="av-img" src="images/photo-chenyourong.jpg" alt="陳宥融"
@@ -1285,7 +1309,8 @@ html.lang-en .en-text.block { display: block; }
         <div class="mr">爵士鼓 · Jazz Drums</div>
         <div class="mb">YAMAHA Taiwan 爵士鼓音樂家、美國 Soultone Cymbals Artist。RockSchool 國際認證 Grade 8 Pass With Distinction，曾就讀美國 Musicians Institute 音樂學院。</div>
       </div>
-      <div class="mc rev d3">
+      <div class="mc rev d1" data-cat="band">
+        <div class="mc-cat-badge">樂團樂手</div>
         <div class="av">
           <div class="av-inner">
             <img class="av-img" src="images/photo-caian.jpg" alt="蔡安"
@@ -1296,6 +1321,38 @@ html.lang-en .en-text.block { display: block; }
         <div class="mn-en">Tsai An</div>
         <div class="mr">打擊 · Percussion / Asalato</div>
         <div class="mb">南藝大中國音樂學系碩士，主修打擊。跨習京劇鑼鼓、Asalato、甘美朗，打擊語彙橫跨東亞與非洲。2017 年全中國青少年打擊樂賽個人青年組第三名。</div>
+      </div>
+      <div class="mc rev d2" data-cat="composer-res">
+        <div class="mc-cat-badge" style="background:rgba(0,212,245,.08);border-color:rgba(0,212,245,.22);color:var(--cy)">駐團作曲家</div>
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-lihaowen.jpg" alt="李浩恩"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>李</span>')">
+          </div>
+        </div>
+        <div class="mn">李浩恩</div>
+        <div class="mn-en">Li Hao-en</div>
+        <div class="mr">鋼琴 · Piano / Composer</div>
+        <div class="mb">生於馬來西亞，北藝大音樂系理論作曲兼修鋼琴。作品《燼》獲 TSMC × NSO × TNUA「一分鐘交響曲計畫」，由國家交響樂團於國家音樂廳發表。2024 年關渡新聲優勝，以《Nostalgia》發表。</div>
+      </div>
+      <div class="mc rev d3" data-cat="admin">
+        <div class="mc-cat-badge" style="background:rgba(232,160,32,.08);border-color:rgba(232,160,32,.22);color:var(--gd)">行政團員</div>
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-tsaihanjie.jpg" alt="蔡函潔"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>蔡</span>')">
+          </div>
+        </div>
+        <div class="mn">蔡函潔</div>
+        <div class="mn-en">Tsai Han-jie</div>
+        <div class="mr">Electric Bass · 行政總監</div>
+        <div class="mb">藝文專案企劃，10 年跨足音樂、出版、藝文產業。曾協助金曲獎入圍歌手雷擎企劃執行經紀；光球音樂祭統籌與行銷負責人。</div>
+      </div>
+
+      <!-- Empty state for categories with no members yet -->
+      <div class="team-empty" id="team-empty">
+        <strong>即將加入</strong><br>
+        這個分類目前尚無成員，敬請期待。
       </div>
     </div>
   </div>
@@ -1602,6 +1659,32 @@ setTimeout(() => {
   const el = document.getElementById('htitle');
   if (el) new Scramble(el).set('FALABIBO');
 }, 1900);
+
+/* ── TEAM FILTER TABS ── */
+document.querySelectorAll('.team-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const filter = tab.dataset.filter;
+    // Update active tab
+    document.querySelectorAll('.team-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    // Filter cards
+    const cards = document.querySelectorAll('.mc');
+    let visible = 0;
+    cards.forEach(card => {
+      if (filter === 'all' || card.dataset.cat === filter) {
+        card.classList.remove('hidden');
+        visible++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+    // Show/hide empty state
+    const empty = document.getElementById('team-empty');
+    if (empty) {
+      empty.classList.toggle('visible', visible === 0);
+    }
+  });
+});
 
 /* ── HERO PARALLAX ── */
 (function() {
