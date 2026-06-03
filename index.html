@@ -1279,8 +1279,8 @@ html.lang-en .en-text.block { display: block; }
 
     <!-- Category tabs -->
     <div class="team-tabs">
-      <button class="team-tab active" data-filter="all">全部 · All</button>
-      <button class="team-tab" data-filter="band">樂團樂手</button>
+      <button class="team-tab" data-filter="all">全部 · All</button>
+      <button class="team-tab active" data-filter="band">樂團樂手</button>
       <button class="team-tab" data-filter="guest">特邀合作樂手</button>
       <button class="team-tab" data-filter="composer-res">駐團作曲家</button>
       <button class="team-tab" data-filter="composer-col">合作作曲家</button>
@@ -1859,6 +1859,14 @@ setTimeout(() => {
 }, 1900);
 
 /* ── TEAM FILTER TABS ── */
+// 初始化：預設顯示樂團樂手
+(function() {
+  document.querySelectorAll('.mc').forEach(card => {
+    const cats = (card.dataset.cat || '').split(' ');
+    if (!cats.includes('band')) card.classList.add('hidden');
+  });
+})();
+
 document.querySelectorAll('.team-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     const filter = tab.dataset.filter;
