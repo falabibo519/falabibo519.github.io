@@ -1859,37 +1859,31 @@ setTimeout(() => {
 }, 1900);
 
 /* ── TEAM FILTER TABS ── */
-// 初始化：預設顯示樂團樂手
-(function() {
-  document.querySelectorAll('.mc').forEach(card => {
+function applyTeamFilter(filter) {
+  const cards = document.querySelectorAll('.mc');
+  let visible = 0;
+  cards.forEach(card => {
     const cats = (card.dataset.cat || '').split(' ');
-    if (!cats.includes('band')) card.classList.add('hidden');
+    if (filter === 'all' || cats.includes(filter)) {
+      card.classList.remove('hidden');
+      card.classList.add('on'); // 確保 rev 動畫已套用，卡片可見
+      visible++;
+    } else {
+      card.classList.add('hidden');
+    }
   });
-})();
+  const empty = document.getElementById('team-empty');
+  if (empty) empty.classList.toggle('visible', visible === 0);
+}
+
+// 預設顯示樂團樂手
+applyTeamFilter('band');
 
 document.querySelectorAll('.team-tab').forEach(tab => {
   tab.addEventListener('click', () => {
-    const filter = tab.dataset.filter;
-    // Update active tab
     document.querySelectorAll('.team-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
-    // Filter cards
-    const cards = document.querySelectorAll('.mc');
-    let visible = 0;
-    cards.forEach(card => {
-      const cats = (card.dataset.cat || '').split(' ');
-      if (filter === 'all' || cats.includes(filter)) {
-        card.classList.remove('hidden');
-        visible++;
-      } else {
-        card.classList.add('hidden');
-      }
-    });
-    // Show/hide empty state
-    const empty = document.getElementById('team-empty');
-    if (empty) {
-      empty.classList.toggle('visible', visible === 0);
-    }
+    applyTeamFilter(tab.dataset.filter);
   });
 });
 
