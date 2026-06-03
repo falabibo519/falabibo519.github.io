@@ -945,10 +945,10 @@ html.lang-en .en-text.block { display: block; }
 }
 .team-empty.visible { display: block; }
 .team-empty strong { color: var(--mt2); font-style: normal; }
+.mc-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; justify-content: center; }
 .mc-cat-badge {
   display: inline-block; font-size: .6rem; letter-spacing: .14em;
   text-transform: uppercase; padding: 2px 8px; border-radius: 2px;
-  margin-bottom: 14px;
   background: rgba(184,79,255,.08); border: 1px solid rgba(184,79,255,.18); color: var(--pu);
 }
   </style>
@@ -1257,8 +1257,11 @@ html.lang-en .en-text.block { display: block; }
     </div>
 
     <div class="team-grid">
-      <div class="mc rev d1" data-cat="band">
-        <div class="mc-cat-badge">樂團樂手</div>
+      <div class="mc rev d1" data-cat="band admin">
+        <div class="mc-badges">
+          <span class="mc-cat-badge">樂團樂手</span>
+          <span class="mc-cat-badge" style="background:rgba(232,160,32,.08);border-color:rgba(232,160,32,.22);color:var(--gd)">行政團員</span>
+        </div>
         <div class="av">
           <div class="av-inner">
             <img class="av-img" src="images/photo-zhuzhimin.jpg" alt="朱哲民"
@@ -1322,8 +1325,11 @@ html.lang-en .en-text.block { display: block; }
         <div class="mr">打擊 · Percussion / Asalato</div>
         <div class="mb">南藝大中國音樂學系碩士，主修打擊。跨習京劇鑼鼓、Asalato、甘美朗，打擊語彙橫跨東亞與非洲。2017 年全中國青少年打擊樂賽個人青年組第三名。</div>
       </div>
-      <div class="mc rev d2" data-cat="composer-res">
-        <div class="mc-cat-badge" style="background:rgba(0,212,245,.08);border-color:rgba(0,212,245,.22);color:var(--cy)">駐團作曲家</div>
+      <div class="mc rev d2" data-cat="band composer-res">
+        <div class="mc-badges">
+          <span class="mc-cat-badge">樂團樂手</span>
+          <span class="mc-cat-badge" style="background:rgba(0,212,245,.08);border-color:rgba(0,212,245,.22);color:var(--cy)">駐團作曲家</span>
+        </div>
         <div class="av">
           <div class="av-inner">
             <img class="av-img" src="images/photo-lihaowen.jpg" alt="李浩恩"
@@ -1335,8 +1341,11 @@ html.lang-en .en-text.block { display: block; }
         <div class="mr">鋼琴 · Piano / Composer</div>
         <div class="mb">生於馬來西亞，北藝大音樂系理論作曲兼修鋼琴。作品《燼》獲 TSMC × NSO × TNUA「一分鐘交響曲計畫」，由國家交響樂團於國家音樂廳發表。2024 年關渡新聲優勝，以《Nostalgia》發表。</div>
       </div>
-      <div class="mc rev d3" data-cat="admin">
-        <div class="mc-cat-badge" style="background:rgba(232,160,32,.08);border-color:rgba(232,160,32,.22);color:var(--gd)">行政團員</div>
+      <div class="mc rev d3" data-cat="band admin">
+        <div class="mc-badges">
+          <span class="mc-cat-badge">樂團樂手</span>
+          <span class="mc-cat-badge" style="background:rgba(232,160,32,.08);border-color:rgba(232,160,32,.22);color:var(--gd)">行政團員</span>
+        </div>
         <div class="av">
           <div class="av-inner">
             <img class="av-img" src="images/photo-tsaihanjie.jpg" alt="蔡函潔"
@@ -1839,7 +1848,8 @@ document.querySelectorAll('.team-tab').forEach(tab => {
     const cards = document.querySelectorAll('.mc');
     let visible = 0;
     cards.forEach(card => {
-      if (filter === 'all' || card.dataset.cat === filter) {
+      const cats = (card.dataset.cat || '').split(' ');
+      if (filter === 'all' || cats.includes(filter)) {
         card.classList.remove('hidden');
         visible++;
       } else {
