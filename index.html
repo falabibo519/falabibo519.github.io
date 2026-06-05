@@ -968,6 +968,25 @@ html.lang-en .en-text.block { display: block; }
 }
 .mc.hidden { display: none !important; }
 .mc { transition: opacity .3s ease; }
+/* ── FALA力 racing strip ── */
+.fala-strip {
+  display: flex; align-items: center; gap: 14px;
+  margin: -28px 0 40px;
+  padding: 10px 18px;
+  background: linear-gradient(90deg, rgba(232,160,32,.07) 0%, transparent 80%);
+  border-left: 3px solid var(--gd); border-radius: 0 4px 4px 0;
+}
+.fala-hl {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .22em;
+  background: linear-gradient(110deg, var(--gd) 0%, #ff5a18 50%, var(--pk) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  flex-shrink: 0; line-height: 1;
+}
+.fala-sub {
+  font-size: .78rem; color: var(--mt2);
+  font-family: 'Noto Serif TC', serif; font-style: italic; letter-spacing: .05em;
+}
+@media (max-width: 600px) { .fala-sub { display: none; } }
 .team-empty {
   width: 100%; padding: 52px 32px; text-align: center;
   font-size: .88rem; color: var(--mt); font-style: italic;
@@ -1277,6 +1296,12 @@ html.lang-en .en-text.block { display: block; }
       <hr class="s-line">
     </div>
 
+    <!-- FALA力 tagline -->
+    <div class="fala-strip rev" title="FALABIBO 的力量 = FALA 力，諧音法拉利 Ferrari ⚡">
+      <span class="fala-hl">FALA 力 ⚡</span>
+      <span class="fala-sub">集結一群充滿 FALA 力的音樂人，以台灣傳統文化為燃料，奔馳於當代音樂舞台</span>
+    </div>
+
     <!-- Category tabs -->
     <div class="team-tabs">
       <button class="team-tab" data-filter="all">全部 · All</button>
@@ -1415,8 +1440,8 @@ html.lang-en .en-text.block { display: block; }
         </div>
         <div class="mn">蔣侑蓁</div>
         <div class="mn-en">Jiang You-zhen</div>
-        <div class="mr">特邀合作樂手</div>
-        <div class="mb"></div>
+        <div class="mr">擊樂 · Percussion</div>
+        <div class="mb">現任桃園市國樂團專任演奏員。南藝大中國音樂學系，主修擊樂，師事施德華、蕭曉鈴老師；副修鋼琴，師事陳怡君老師；曾學習京劇鑼鼓與甘美朗。</div>
       </div>
 
       <!-- ── 駐團作曲家：許子薇 ── -->
@@ -1502,20 +1527,6 @@ html.lang-en .en-text.block { display: block; }
         <div class="mr">中阮 · Zhongruan / Composer</div>
         <div class="mb">2001 年生，南藝大中國音樂學系，主修中阮，師事于惠蘭老師；現就讀師大民族音樂研究所，主修作曲，現於 TCO 學院國樂團擔任中阮演奏員。全國學生音樂比賽中阮獨奏多次特優第一名，2024 年底舉辦個人作品音樂會《幽枯花影》。</div>
       </div>
-      <div class="mc rev d1" data-cat="composer-col">
-        <div class="mc-cat-badge" style="background:rgba(184,79,255,.06);border-color:rgba(184,79,255,.2);color:var(--mt2)">合作作曲家</div>
-        <div class="av">
-          <div class="av-inner">
-            <img class="av-img" src="images/photo-chenyifeng.jpg" alt="陳亦豐"
-              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>陳</span>')">
-          </div>
-        </div>
-        <div class="mn">陳亦豐</div>
-        <div class="mn-en">Chen Yi-feng</div>
-        <div class="mr">合作作曲家</div>
-        <div class="mb"></div>
-      </div>
-
       <!-- ── 行政團隊：洪婉晴、王語歆、王郁程 ── -->
       <div class="mc rev d2" data-cat="admin">
         <div class="mc-cat-badge" style="background:rgba(232,160,32,.08);border-color:rgba(232,160,32,.22);color:var(--gd)">行政團員</div>
@@ -1555,6 +1566,21 @@ html.lang-en .en-text.block { display: block; }
         <div class="mn-en">Wang Yu-cheng</div>
         <div class="mr">攝影</div>
         <div class="mb"></div>
+      </div>
+
+      <!-- ── 行政團員：邱儒玥 ── -->
+      <div class="mc rev d2" data-cat="admin">
+        <div class="mc-cat-badge" style="background:rgba(232,160,32,.08);border-color:rgba(232,160,32,.22);color:var(--gd)">行政團員</div>
+        <div class="av">
+          <div class="av-inner">
+            <img class="av-img" src="images/photo-qiuruyue.jpg" alt="邱儒玥"
+              onerror="this.style.display='none';this.parentNode.insertAdjacentHTML('beforeend','<span class=av-char>邱</span>')">
+          </div>
+        </div>
+        <div class="mn">邱儒玥</div>
+        <div class="mn-en">Qiu Ru-yue</div>
+        <div class="mr">行政</div>
+        <div class="mb">曾任師大國樂社副團長、監事，處理社團行政、總務、網管、美宣等業務。空閒時喜歡做一些有趣的行政工作，興趣是編輯 Excel。</div>
       </div>
 
       <!-- Empty state for categories with no members yet -->
