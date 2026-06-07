@@ -606,6 +606,13 @@ nav.stuck {
 }
 .t-conf { background: rgba(0,212,245,.1); color: var(--cy); border: 1px solid rgba(0,212,245,.25); }
 .t-plan { background: rgba(80,80,128,.1); color: var(--mt); border: 1px solid rgba(80,80,128,.2); }
+.show-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.show-ticket {
+  font-size: .68rem; letter-spacing: .1em; font-family: var(--fb); text-transform: uppercase;
+  color: var(--cy); border: 1px dashed rgba(0,212,245,.35); padding: 5px 14px;
+  border-radius: 2px; text-decoration: none; transition: all .25s; white-space: nowrap;
+}
+.show-ticket:hover { background: rgba(0,212,245,.1); border-style: solid; }
 
 /* ═══════════════════════════════════════════════
    CONNECT
@@ -1225,7 +1232,7 @@ html.lang-en .en-text.block { display: block; }
   <div class="sw">
     <div class="sh rev">
       <span class="s-num">03 · Productions</span>
-      <h2 class="s-title">製作歷史<span class="s-title-en">Our Productions</span></h2>
+      <h2 class="s-title">過去創作<span class="s-title-en">Past Works</span></h2>
       <hr class="s-line">
     </div>
     <div class="prod-grid">
@@ -1243,7 +1250,7 @@ html.lang-en .en-text.block { display: block; }
         </div>
         <p class="pdesc zh-text">八音的溫潤與憂愁，換上了霓虹的衣裳。與製作人 BENN（Over My Body 廠牌）合作，傳統嗩吶與二胡的音色穿越蒸汽波的夢境聲景，那些留在老照片裡的聲音，在這裡找到了它們的當代形狀。</p>
         <p class="pdesc en-text block">Hakka Pa-yin's warmth and yearning, dressed in neon. Co-produced with BENN (Over My Body label) — traditional suona and erhu timbres reshaped into a vaporwave dreamscape.</p>
-        <div class="pmeta">演出：<strong>2026 / 9 / 5 · 國立臺灣大學 · 台北</strong></div>
+        <div class="pmeta">演出：<strong>待公布</strong></div>
       </div>
 
       <!-- 晴耕雨讀 -->
@@ -1256,7 +1263,7 @@ html.lang-en .en-text.block { display: block; }
         </div>
         <p class="pdesc zh-text">八首客家八音核心曲目，以 City Pop、Jazz 與 Latin 重新詮釋。《大開門》《月光華華》《糶酒》《思戀歌》《搖擺弦索》《新剪剪花》《月光緣》《團圓》——2026 年六月全系列影片連載。</p>
         <p class="pdesc en-text block">Eight Hakka Pa-yin classics reimagined through City Pop, Jazz & Latin. Complete 8-part YouTube series releasing June 2026.</p>
-        <div class="pmeta">演出：<strong>台南 · 新北 · 基隆（規劃中）</strong></div>
+        <div class="pmeta">演出：<strong>新北板橋 · 蘆洲 · 基隆</strong></div>
       </div>
 
       <!-- 童謠遊樂園 -->
@@ -1267,9 +1274,9 @@ html.lang-en .en-text.block { display: block; }
         <div class="ptags">
           <span class="ptag">互動音樂會</span><span class="ptag">親子</span><span class="ptag">世界民謠</span>
         </div>
-        <p class="pdesc zh-text">帶孩子聽見世界——以客家八音重新編奏全球兒童民謠。文化部基層展演補助製作，已完成苗栗、台南、桃園三地巡演。</p>
-        <p class="pdesc en-text block">Global children's folk songs through the lens of Hakka Pa-yin. A Ministry of Culture-funded touring production performed across Miaoli, Tainan & Taoyuan.</p>
-        <div class="pmeta">演出：<strong>苗栗 · 台南 · 桃園（2026/4 完成）</strong></div>
+        <p class="pdesc zh-text">帶孩子聽見世界——精選來自世界各地的 12 首經典兒童歌曲，打造一場具有聆聽性與童趣的家庭親子音樂會。文化部基層展演補助製作，已完成苗栗、台南、桃園三地巡演。</p>
+        <p class="pdesc en-text block">12 classic children's folk songs from around the world. A Ministry of Culture-funded family concert touring across Taiwan.</p>
+        <div class="pmeta">演出：<strong>苗栗 · 桃園</strong></div>
       </div>
 
       <!-- 萬花筒 -->
@@ -1278,7 +1285,7 @@ html.lang-en .en-text.block { display: block; }
         <div class="pt">《萬花筒 Mangekyo》</div>
         <div class="pt-sub">World Folk Songs × Hakka Pa-yin · 2023–2024</div>
         <div class="ptags">
-          <span class="ptag">World Music</span><span class="ptag">客家八音</span><span class="ptag">原住民</span>
+          <span class="ptag">World Music</span><span class="ptag">客家八音</span><span class="ptag">彈兒</span><span class="ptag">原住民</span>
         </div>
         <p class="pdesc zh-text">FALABIBO 的起點。以世界各地民謠為材料，探索文化相遇的聲響可能。2023 年宜蘭演藝廳世界首演，開啟了一個樂團的聲音旅程。</p>
         <p class="pdesc en-text block">The beginning. World folk songs as raw material, exploring the sound of cultures in conversation. World premiere at Yilan Arts Center, 2023.</p>
@@ -1541,7 +1548,7 @@ html.lang-en .en-text.block { display: block; }
         <div class="mn">洪婉晴</div>
         <div class="mn-en">Hong Wan-ching</div>
         <div class="mr">舞台總監</div>
-        <div class="mb"></div>
+        <div class="mb">曾任師大國樂社社長與監事、中山建中校友國樂團團長。喜愛樂團行政、舞台場務與打細流，目前擔任 FALABIBO 舞監並協同行政。</div>
       </div>
       <div class="mc rev d3" data-cat="admin">
         <div class="mc-cat-badge" style="background:rgba(232,160,32,.08);border-color:rgba(232,160,32,.22);color:var(--gd)">行政團員</div>
@@ -1613,7 +1620,11 @@ html.lang-en .en-text.block { display: block; }
           <div class="show-name">《客氣波 Hakka Wave》</div>
           <div class="show-venue">國立臺灣大學 · 台北 &nbsp;·&nbsp; Hakka Pa-yin × Vaporwave × City Pop</div>
         </div>
-        <span class="show-tag t-conf">Confirmed</span>
+        <div class="show-right">
+          <span class="show-tag t-conf">Confirmed</span>
+          <!-- 購票/報名連結：將 href="#" 替換為實際 URL -->
+          <a class="show-ticket" href="#" target="_blank" rel="noopener">購票連結 →</a>
+        </div>
       </div>
       <div class="show rev d2">
         <div class="show-dt">
@@ -1625,7 +1636,11 @@ html.lang-en .en-text.block { display: block; }
           <div class="show-name">《晴耕雨讀 弄八音》基隆場</div>
           <div class="show-venue">基隆 · 客家八音 × City Pop / Jazz</div>
         </div>
-        <span class="show-tag t-plan">Planning</span>
+        <div class="show-right">
+          <span class="show-tag t-plan">Planning</span>
+          <!-- 購票/報名連結：將 href="#" 替換為實際 URL -->
+          <a class="show-ticket" href="#" target="_blank" rel="noopener">購票連結 →</a>
+        </div>
       </div>
     </div>
   </div>
