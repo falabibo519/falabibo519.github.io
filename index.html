@@ -8,6 +8,11 @@
   <meta property="og:title" content="FALABIBO｜Hakka Futurism">
   <meta property="og:description" content="Hakka Pa-yin music reimagined through Vaporwave, City Pop & Jazz. From Taiwan.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://falabibo519.github.io/">
+  <meta property="og:image" content="https://falabibo519.github.io/images/photo-group.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="563">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#050509">
   <meta name="google-site-verification" content="u3byZLZDp0Co6hcLUAPUEQ2rkHe8I9YXeqYOrq3kl3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1021,7 +1026,76 @@ html.lang-en .en-text.block { display: block; }
   text-transform: uppercase; padding: 2px 8px; border-radius: 2px;
   background: rgba(184,79,255,.08); border: 1px solid rgba(184,79,255,.18); color: var(--pu);
 }
-  </style>
+  
+/* ═══════════════════════════════════════════════
+   BOOKING 邀演合作（2026-11 新增）
+═══════════════════════════════════════════════ */
+.show-empty { display: none; padding: 28px; border: 1px dashed rgba(184,79,255,.25); border-radius: 6px; color: var(--mt2); font-size: var(--fs-sm); line-height: 1.9; }
+.show-empty.visible { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.show.past { display: none; }
+
+#booking { background: var(--bg); }
+.bk-intro { max-width: 640px; color: var(--mt2); font-size: var(--fs-base); line-height: 1.9; margin: -28px 0 48px; }
+.bk-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 56px; }
+.bk-card {
+  position: relative; padding: 32px 30px 28px; background: var(--bg2);
+  border: 1px solid rgba(184,79,255,.12); border-radius: 6px;
+  transition: border-color .3s, transform .3s var(--ease), box-shadow .3s;
+  display: flex; flex-direction: column;
+}
+.bk-card:hover { border-color: rgba(184,79,255,.35); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,.35); }
+.bk-card::before { content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 2px; background: var(--grad); opacity: .55; border-radius: 6px 6px 0 0; }
+.bk-no { font-family: var(--fd); font-size: var(--fs-xl); color: var(--pu); letter-spacing: var(--ls-1); line-height: 1; }
+.bk-t { font-family: var(--fs); font-size: var(--fs-lg); font-weight: 700; margin: 10px 0 2px; }
+.bk-te { font-size: var(--fs-xs); letter-spacing: var(--ls-2); text-transform: uppercase; color: var(--mt); margin-bottom: 16px; }
+.bk-for { font-size: var(--fs-sm); color: var(--wh); margin-bottom: 12px; }
+.bk-for b { color: var(--pu); font-weight: 600; margin-right: 6px; }
+.bk-d { font-size: var(--fs-sm); color: var(--mt2); line-height: 1.85; margin-bottom: 18px; flex: 1; }
+.bk-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.bk-meta span { font-size: var(--fs-xs); letter-spacing: var(--ls-1); color: var(--mt2); border: 1px solid rgba(184,79,255,.18); padding: 4px 10px; border-radius: 2px; }
+.bk-cta { align-self: flex-start; font-size: var(--fs-xs); letter-spacing: var(--ls-2); text-transform: uppercase; color: var(--cy); border: 1px dashed rgba(0,212,245,.35); padding: 6px 14px; border-radius: 2px; transition: all .25s; }
+.bk-cta:hover { background: rgba(0,212,245,.1); border-style: solid; }
+
+.bk-trust { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(184,79,255,.12); border: 1px solid rgba(184,79,255,.12); border-radius: 6px; overflow: hidden; margin-bottom: 64px; }
+.bk-tr { background: var(--bg2); padding: 22px 20px; }
+.bk-tr-n { font-family: var(--fd); font-size: var(--fs-xl); letter-spacing: var(--ls-1); line-height: 1.1; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.bk-tr-l { font-size: var(--fs-xs); color: var(--mt2); line-height: 1.7; margin-top: 6px; }
+
+.bk-form-wrap { display: grid; grid-template-columns: 1fr 1.4fr; gap: 48px; align-items: start; }
+.bk-steps { list-style: none; counter-reset: st; }
+.bk-steps li { counter-increment: st; position: relative; padding: 0 0 22px 44px; font-size: var(--fs-sm); color: var(--mt2); line-height: 1.8; }
+.bk-steps li::before { content: counter(st); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; border: 1px solid rgba(184,79,255,.4); color: var(--pu); font-family: var(--fd); font-size: var(--fs-base); display: flex; align-items: center; justify-content: center; }
+.bk-steps li b { display: block; color: var(--wh); font-weight: 600; }
+.bk-h { font-family: var(--fs); font-size: var(--fs-lg); font-weight: 700; margin-bottom: 20px; }
+.bk-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; background: var(--bg2); border: 1px solid rgba(184,79,255,.12); border-radius: 6px; padding: 28px; }
+.bk-f { display: flex; flex-direction: column; gap: 6px; }
+.bk-f.full { grid-column: 1 / -1; }
+.bk-f label { font-size: var(--fs-xs); letter-spacing: var(--ls-1); color: var(--mt2); }
+.bk-f label i { color: var(--pk); font-style: normal; }
+.bk-f input, .bk-f select, .bk-f textarea {
+  width: 100%; background: var(--bg3); border: 1px solid rgba(184,79,255,.2); border-radius: 3px;
+  color: var(--wh); font-family: var(--fb); font-size: var(--fs-sm); padding: 10px 12px; cursor: text;
+  transition: border-color .2s, box-shadow .2s;
+}
+.bk-f select { cursor: pointer; }
+.bk-f textarea { min-height: 110px; resize: vertical; line-height: 1.7; }
+.bk-f input:focus, .bk-f select:focus, .bk-f textarea:focus { outline: none; border-color: var(--cy); box-shadow: 0 0 0 3px rgba(0,212,245,.12); }
+.bk-submit { grid-column: 1 / -1; justify-content: center; cursor: pointer; }
+.bk-note { grid-column: 1 / -1; font-size: var(--fs-xs); color: var(--mt); line-height: 1.8; text-align: center; }
+.bk-note a { color: var(--cy); }
+.bk-msg { grid-column: 1 / -1; display: none; font-size: var(--fs-sm); color: var(--cy); text-align: center; }
+.bk-msg.visible { display: block; }
+
+@media (max-width: 900px) {
+  .bk-grid { grid-template-columns: 1fr; }
+  .bk-trust { grid-template-columns: 1fr 1fr; }
+  .bk-form-wrap { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 520px) {
+  .bk-form { grid-template-columns: 1fr; padding: 20px; }
+  .bk-trust { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body class="loading">
 
@@ -1048,6 +1122,7 @@ html.lang-en .en-text.block { display: block; }
     <li><a href="#music">Works</a></li>
     <li><a href="#team">Team</a></li>
     <li><a href="#shows">Shows</a></li>
+    <li><a href="#booking">Booking</a></li>
     <li><a href="#connect">Connect</a></li>
   </ul>
   <button class="lang-btn" id="lang-btn" onclick="toggleLang()">EN</button>
@@ -1079,7 +1154,7 @@ html.lang-en .en-text.block { display: block; }
     </p>
     <div class="h-btns">
       <a href="#music" class="btn btn-fill mag">作品欣賞 · Works</a>
-      <a href="#shows" class="btn btn-ghost mag">最新演出 · Shows</a>
+      <a href="#booking" class="btn btn-ghost mag">邀演合作 · Booking</a>
     </div>
   </div>
 
@@ -1103,7 +1178,7 @@ html.lang-en .en-text.block { display: block; }
   <span class="cred-item">苗栗中正堂</span>
   <span class="cred-sep">·</span>
   <span class="cred-item">桃園市演藝廳</span>
-  <span class="cred-badge">國藝會 · 文化部補助</span>
+  <span class="cred-badge">國藝會 · 臺北市文化局 · 新北市文化局 等補助</span>
 </div>
 
 <!-- ══ ABOUT ══ -->
@@ -1130,7 +1205,7 @@ html.lang-en .en-text.block { display: block; }
         </div>
         <div class="stats">
           <div class="stat"><div class="stat-n">2022</div><div class="stat-l">Founded</div></div>
-          <div class="stat"><div class="stat-n">10+</div><div class="stat-l">Shows</div></div>
+          <div class="stat"><div class="stat-n">12+</div><div class="stat-l">Shows</div></div>
           <div class="stat"><div class="stat-n">4</div><div class="stat-l">Productions</div></div>
         </div>
       </div>
@@ -1174,9 +1249,9 @@ html.lang-en .en-text.block { display: block; }
         <div class="tl-year">2025</div>
         <div class="tl-content">
           <div class="tl-title">《童謠遊樂園》《晴耕雨讀 弄八音》</div>
-          <div class="tl-desc zh-text">推出第二與第三個全新製作。《童謠遊樂園》（文化部基層展演補助）精選世界各地 12 首經典兒童歌曲，打造具聆聽性與童趣的家庭親子音樂會。《晴耕雨讀 弄八音》（國藝會補助）為全樂團全新篇章，以八首客家八音曲目為核心，委託多位當代年輕作曲家創作，以 City Pop、Jazz 與 Latin 風格重新詮釋。於苗栗、台南與新北演出。</div>
-          <div class="tl-desc en-text block">Two new productions: a family concert of children's folk songs, supported by the Ministry of Culture, and a full reimagining of Hakka Pa-yin classics through City Pop, Jazz & Latin, supported by the National Culture and Arts Foundation — performed in Miaoli, Tainan and New Taipei.</div>
-          <span class="tl-badge">文化部 · 國藝會補助</span>
+          <div class="tl-desc zh-text">推出第二與第三個全新製作。《童謠遊樂園》精選世界各地 12 首經典兒童歌曲，打造具聆聽性與童趣的家庭親子音樂會。《晴耕雨讀 弄八音》（國藝會補助）為全樂團全新篇章，以八首客家八音曲目為核心，委託多位當代年輕作曲家創作，以 City Pop、Jazz 與 Latin 風格重新詮釋。於苗栗、新北等地演出。</div>
+          <div class="tl-desc en-text block">Two new productions: a family concert of children's folk songs, and a full reimagining of Hakka Pa-yin classics through City Pop, Jazz & Latin, supported by the National Culture and Arts Foundation — performed in Miaoli and New Taipei.</div>
+          <span class="tl-badge">國藝會補助</span>
         </div>
       </div>
 
@@ -1287,9 +1362,9 @@ html.lang-en .en-text.block { display: block; }
         <div class="ptags">
           <span class="ptag">互動音樂會</span><span class="ptag">親子</span><span class="ptag">世界民謠</span>
         </div>
-        <p class="pdesc zh-text">帶孩子聽見世界——精選來自世界各地的 12 首經典兒童歌曲，打造一場具有聆聽性與童趣的家庭親子音樂會。文化部基層展演補助製作，已完成苗栗、台南、桃園三地巡演。</p>
-        <p class="pdesc en-text block">12 classic children's folk songs from around the world. A Ministry of Culture-funded family concert touring across Taiwan.</p>
-        <div class="pmeta">演出：<strong>苗栗 · 台南 · 桃園</strong></div>
+        <p class="pdesc zh-text">帶孩子聽見世界——精選來自世界各地的 12 首經典兒童歌曲，打造一場具有聆聽性與童趣的家庭親子音樂會。已於苗栗縣中正堂、桃園市文化局演藝廳演出。</p>
+        <p class="pdesc en-text block">12 classic children's folk songs from around the world. A family concert performed in Miaoli and Taoyuan.</p>
+        <div class="pmeta">演出：<strong>苗栗 · 桃園</strong></div>
       </div>
 
       <!-- 萬花筒 -->
@@ -1623,7 +1698,7 @@ html.lang-en .en-text.block { display: block; }
       <hr class="s-line">
     </div>
     <div class="shows-list">
-      <div class="show rev d1">
+      <div class="show rev d1" data-date="2026-11-14">
         <div class="show-dt">
           <div class="sd-mon">Nov</div>
           <div class="sd-day">14</div>
@@ -1637,6 +1712,11 @@ html.lang-en .en-text.block { display: block; }
           <span class="show-tag t-conf">Confirmed</span>
           <span class="show-tag t-conf">免費入場 · Free Admission</span>
         </div>
+      </div>
+      <div class="show-empty" id="shows-empty">
+        <span class="zh-text">下一場公演即將公布。想邀請 FALABIBO 到你的活動、課堂或典禮？</span>
+        <span class="en-text">Our next public show will be announced soon. Want FALABIBO at your event, class or ceremony?</span>
+        <a href="#booking" class="show-ticket">邀演合作 · Booking →</a>
       </div>
     </div>
   </div>
@@ -1689,11 +1769,114 @@ html.lang-en .en-text.block { display: block; }
   </div>
 </section>
 
+<!-- ══ BOOKING 邀演合作 ══ -->
+<section id="booking" class="sec-border">
+  <div class="sw">
+    <div class="sh rev">
+      <span class="s-num">07 · Booking</span>
+      <h2 class="s-title">邀演合作<span class="s-title-en">Book FALABIBO</span></h2>
+      <hr class="s-line">
+    </div>
+    <p class="bk-intro rev">
+      <span class="zh-text">從尾牙舞台到校園講堂，FALABIBO 依場合調整編制、曲目與長度。每一場都有團長親自導聆——讓觀眾聽得懂，也記得住。</span>
+      <span class="en-text">From gala stages to classrooms, FALABIBO tailors line-up, repertoire and length to each occasion — always with a spoken introduction by our artistic director, so audiences understand what they hear and remember it.</span>
+    </p>
+
+    <div class="bk-grid">
+      <div class="bk-card rev d1">
+        <div class="bk-no">01</div>
+        <div class="bk-t">企業活動演出</div>
+        <div class="bk-te">Corporate Events &amp; Galas</div>
+        <div class="bk-for"><b><span class="zh-text">適合</span><span class="en-text">For</span></b><span class="zh-text">尾牙、春酒、開幕、品牌活動、頒獎典禮</span><span class="en-text">Year-end galas, openings, brand events, award ceremonies</span></div>
+        <p class="bk-d"><span class="zh-text">客家八音遇上 City Pop、Funk 與爵士，熱鬧又有記憶點。可擔任開場、串場或壓軸，配合活動流程與主持節奏。</span><span class="en-text">Hakka Pa-yin meets City Pop, Funk and Jazz — festive and memorable. We can open, bridge or close your programme, fitted to your run-of-show.</span></p>
+        <div class="bk-meta"><span>5–8 人 · 彈性編制</span><span>可配合活動流程</span></div>
+        <a href="#bk-form" class="bk-cta" data-type="企業活動演出">歡迎洽詢報價 · Inquire →</a>
+      </div>
+      <div class="bk-card rev d2">
+        <div class="bk-no">02</div>
+        <div class="bk-t">講座音樂會・美學課程</div>
+        <div class="bk-te">Talk-Concerts &amp; Workshops</div>
+        <div class="bk-for"><b><span class="zh-text">適合</span><span class="en-text">For</span></b><span class="zh-text">企業內訓、美學課程、讀書會、文化講座</span><span class="en-text">Corporate training, arts appreciation courses, cultural talks</span></div>
+        <p class="bk-d"><span class="zh-text">由團長朱哲民主講，從傳統客家八音談到跨文化改編的創意思考，搭配樂手現場示範演奏。聽完會多一雙聽音樂的耳朵。</span><span class="en-text">Led by artistic director Chu Che-Min — from traditional Hakka Pa-yin to the creative thinking behind cross-cultural arrangement, with live demonstrations by the band.</span></p>
+        <div class="bk-meta"><span>講座 ＋ 現場示範</span><span>可客製主題</span></div>
+        <a href="#bk-form" class="bk-cta" data-type="講座音樂會／美學課程">歡迎洽詢報價 · Inquire →</a>
+      </div>
+      <div class="bk-card rev d1">
+        <div class="bk-no">03</div>
+        <div class="bk-t">校園藝術教育</div>
+        <div class="bk-te">Schools &amp; Universities</div>
+        <div class="bk-for"><b><span class="zh-text">適合</span><span class="en-text">For</span></b><span class="zh-text">國小、國中、高中、大學、藝術週、通識課程</span><span class="en-text">Primary to university, arts weeks, general-education courses</span></div>
+        <p class="bk-d"><span class="zh-text">國小可安排《童謠遊樂園》互動音樂會，拍手合唱、認識世界樂器；國高中與大學則以「傳統 × 當代」導聆演出，帶學生理解在地文化如何被重新使用。</span><span class="en-text">Interactive children's concerts for primary schools; for secondary schools and universities, guided performances on how local tradition is reinvented today.</span></p>
+        <div class="bk-meta"><span>互動音樂會</span><span>導聆演出</span></div>
+        <a href="#bk-form" class="bk-cta" data-type="校園藝術教育">歡迎洽詢報價 · Inquire →</a>
+      </div>
+      <div class="bk-card rev d2">
+        <div class="bk-no">04</div>
+        <div class="bk-t">公部門與國際交流</div>
+        <div class="bk-te">Public Sector &amp; International</div>
+        <div class="bk-for"><b><span class="zh-text">適合</span><span class="en-text">For</span></b><span class="zh-text">客家文化活動、節慶典禮、外交與文化交流場合</span><span class="en-text">Hakka cultural events, festivals, diplomatic and cultural-exchange occasions</span></div>
+        <p class="bk-d"><span class="zh-text">以 Hakka Futurism 呈現台灣獨有的文化聲響。可提供中英雙語介紹與導聆，配合典禮流程與接待需求。</span><span class="en-text">Taiwan's own cultural sound, presented as Hakka Futurism. Bilingual (Mandarin / English) introductions, fitted to ceremonial protocol.</span></p>
+        <div class="bk-meta"><span>中英雙語</span><span>可配合典禮流程</span></div>
+        <a href="#bk-form" class="bk-cta" data-type="公部門／國際交流">歡迎洽詢報價 · Inquire →</a>
+      </div>
+    </div>
+
+    <div class="bk-trust rev">
+      <div class="bk-tr"><div class="bk-tr-n">2022</div><div class="bk-tr-l"><span class="zh-text">新北市立案演藝團體<br>新北文藝字第1110923649N號</span><span class="en-text">Registered performing arts group, New Taipei City</span></div></div>
+      <div class="bk-tr"><div class="bk-tr-n">12+ · 8</div><div class="bk-tr-l"><span class="zh-text">場正式演出 · 縣市巡演<br>宜蘭、新北、臺北、臺中、臺南等</span><span class="en-text">public shows · cities toured across Taiwan</span></div></div>
+      <div class="bk-tr"><div class="bk-tr-n">NCAF+</div><div class="bk-tr-l"><span class="zh-text">國藝會、臺北市與新北市文化局、臺大藝文中心等補助與合作</span><span class="en-text">Supported by the National Culture and Arts Foundation, city cultural bureaus and NTU Arts Center</span></div></div>
+      <div class="bk-tr"><div class="bk-tr-n">八音</div><div class="bk-tr-l"><span class="zh-text">團長為文資局客家八音傳習藝生，師承人間國寶鄭榮興</span><span class="en-text">Director trained under Living National Treasure Prof. Cheng Jung-Hsing</span></div></div>
+    </div>
+
+    <div class="bk-form-wrap" id="bk-form">
+      <div class="rev">
+        <div class="bk-h"><span class="zh-text">邀演流程</span><span class="en-text">How it works</span></div>
+        <ol class="bk-steps">
+          <li><b><span class="zh-text">填寫需求</span><span class="en-text">Tell us about your event</span></b><span class="zh-text">告訴我們日期、地點、人數與活動性質。</span><span class="en-text">Date, venue, audience size and occasion.</span></li>
+          <li><b><span class="zh-text">提供方案與報價</span><span class="en-text">We propose a programme</span></b><span class="zh-text">依場合建議編制、曲目與長度，並附上報價。</span><span class="en-text">Line-up, repertoire, length — with a quote.</span></li>
+          <li><b><span class="zh-text">確認細節</span><span class="en-text">Confirm the details</span></b><span class="zh-text">確認場地、音響與流程，完成簽約。</span><span class="en-text">Venue, sound and run-of-show; agreement signed.</span></li>
+          <li><b><span class="zh-text">登台演出</span><span class="en-text">Showtime</span></b><span class="zh-text">準時進場、彩排，把客家未來主義帶到你的場合。</span><span class="en-text">We arrive, sound-check and bring Hakka Futurism to your stage.</span></li>
+        </ol>
+      </div>
+      <form class="bk-form rev d1" id="bkForm" novalidate>
+        <div class="bk-f"><label for="bk-name">聯絡人 Name <i>*</i></label><input id="bk-name" name="name" required autocomplete="name"></div>
+        <div class="bk-f"><label for="bk-org">單位／公司 Organisation</label><input id="bk-org" name="org" autocomplete="organization"></div>
+        <div class="bk-f"><label for="bk-email">Email <i>*</i></label><input id="bk-email" name="email" type="email" required autocomplete="email"></div>
+        <div class="bk-f"><label for="bk-tel">電話 Phone</label><input id="bk-tel" name="tel" type="tel" autocomplete="tel"></div>
+        <div class="bk-f"><label for="bk-type">活動類型 Type <i>*</i></label>
+          <select id="bk-type" name="type" required>
+            <option value="">請選擇 Select</option>
+            <option>企業活動演出</option>
+            <option>講座音樂會／美學課程</option>
+            <option>校園藝術教育</option>
+            <option>公部門／國際交流</option>
+            <option>其他</option>
+          </select></div>
+        <div class="bk-f"><label for="bk-date">活動日期 Date</label><input id="bk-date" name="date" type="date"></div>
+        <div class="bk-f"><label for="bk-place">地點（縣市／場地） Venue</label><input id="bk-place" name="place"></div>
+        <div class="bk-f"><label for="bk-size">預估人數 Audience</label><input id="bk-size" name="size" inputmode="numeric"></div>
+        <div class="bk-f full"><label for="bk-budget">預算區間 Budget</label>
+          <select id="bk-budget" name="budget">
+            <option>尚未確定</option>
+            <option>5 萬以下</option>
+            <option>5–10 萬</option>
+            <option>10–20 萬</option>
+            <option>20 萬以上</option>
+          </select></div>
+        <div class="bk-f full"><label for="bk-msg">需求說明 Details</label><textarea id="bk-msg" name="msg" placeholder="活動流程、希望的演出長度、場地音響狀況、其他想法……"></textarea></div>
+        <button type="submit" class="btn btn-fill bk-submit">送出洽詢 · Send Inquiry</button>
+        <p class="bk-msg" id="bkMsg"></p>
+        <p class="bk-note">按下後會開啟您的郵件程式並帶入以上內容。若沒有反應，請直接來信 <a href="mailto:falabibo519@gmail.com">falabibo519@gmail.com</a>。</p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- ══ CONNECT ══ -->
 <section id="connect" class="sec-border">
   <div class="sw" style="text-align:center;">
     <div class="sh rev" style="text-align:center;">
-      <span class="s-num" style="display:block;text-align:center;">07 · Connect</span>
+      <span class="s-num" style="display:block;text-align:center;">08 · Connect</span>
       <h2 class="s-title" style="text-align:center;">聯絡我們<span class="s-title-en">Get in Touch</span></h2>
       <hr class="s-line" style="margin:20px auto 0;">
     </div>
@@ -1918,6 +2101,60 @@ document.querySelectorAll('.team-tab').forEach(tab => {
       bg.style.transform = 'translateY(' + (y * 0.38) + 'px)';
     }
   }, { passive: true });
+})();
+
+
+/* ── SHOWS：過期場次自動隱藏 ── */
+(function() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  let left = 0;
+  document.querySelectorAll('.show[data-date]').forEach(s => {
+    const d = new Date(s.dataset.date + 'T23:59:59');
+    if (d < today) s.classList.add('past'); else left++;
+  });
+  const empty = document.getElementById('shows-empty');
+  if (empty && left === 0) empty.classList.add('visible');
+})();
+
+/* ── BOOKING：方案按鈕帶入類型 ＋ 表單轉 email ── */
+document.querySelectorAll('.bk-cta[data-type]').forEach(a => {
+  a.addEventListener('click', () => {
+    const sel = document.getElementById('bk-type');
+    if (sel) sel.value = a.dataset.type;
+  });
+});
+(function() {
+  const f = document.getElementById('bkForm');
+  if (!f) return;
+  f.addEventListener('submit', e => {
+    e.preventDefault();
+    const v = n => (f.elements[n] && f.elements[n].value || '').trim();
+    const msg = document.getElementById('bkMsg');
+    if (!v('name') || !v('email') || !v('type')) {
+      msg.textContent = '請填寫聯絡人、Email 與活動類型。 Please fill in name, email and type.';
+      msg.classList.add('visible'); return;
+    }
+    const subject = '【演出邀約】' + v('type') + (v('date') ? '｜' + v('date') : '') + (v('org') ? '｜' + v('org') : '');
+    const body = [
+      '聯絡人：' + v('name'),
+      '單位／公司：' + v('org'),
+      'Email：' + v('email'),
+      '電話：' + v('tel'),
+      '活動類型：' + v('type'),
+      '活動日期：' + v('date'),
+      '地點：' + v('place'),
+      '預估人數：' + v('size'),
+      '預算區間：' + v('budget'),
+      '',
+      '需求說明：',
+      v('msg'),
+      '',
+      '（由 FALABIBO 官網邀演表單送出）'
+    ].join('\n');
+    window.location.href = 'mailto:falabibo519@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    msg.textContent = '已開啟郵件程式，寄出即完成洽詢。謝謝！ Your mail app should open now — just hit send.';
+    msg.classList.add('visible');
+  });
 })();
 
 /* ── LANGUAGE TOGGLE ── */
